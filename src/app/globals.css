@@ -1,0 +1,167 @@
+@import url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css");
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Vazirmatn", "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", ui-sans-serif, system-ui, sans-serif;
+  --color-brand-50: #f3f1ff;
+  --color-brand-100: #e9e5ff;
+  --color-brand-200: #d6ccff;
+  --color-brand-300: #b8a6ff;
+  --color-brand-400: #9576ff;
+  --color-brand-500: #7c4dff;
+  --color-brand-600: #6c34f0;
+  --color-brand-700: #5b23d4;
+  --color-brand-800: #4a1eab;
+  --color-brand-900: #3d1d88;
+}
+
+:root {
+  --bg-grad: radial-gradient(1200px 700px at 85% -10%, #ede9fe 0%, transparent 55%),
+    radial-gradient(1000px 600px at 0% 0%, #e0f2fe 0%, transparent 50%),
+    linear-gradient(180deg, #f0f1f8 0%, #e8eaf5 100%);
+  --glass-bg: rgba(255, 255, 255, 0.82);
+  --glass-brd: rgba(200, 196, 240, 0.55);
+  --glass-shadow: 0 12px 40px -12px rgba(76, 30, 130, 0.14);
+  --text-1: #1a1730;
+  --text-2: #5a5675;
+  --panel-2: rgba(235, 232, 255, 0.55);
+  --modal-bg: rgba(255, 255, 255, 0.96);
+}
+
+.dark {
+  --bg-grad: radial-gradient(1200px 700px at 85% -10%, #2a1b54 0%, transparent 55%),
+    radial-gradient(1000px 600px at 0% 0%, #0d2440 0%, transparent 50%),
+    linear-gradient(180deg, #08060e 0%, #0c0a1c 100%);
+  --glass-bg: rgba(22, 18, 42, 0.92);
+  --glass-brd: rgba(255, 255, 255, 0.10);
+  --glass-shadow: 0 18px 50px -12px rgba(0, 0, 0, 0.75);
+  --text-1: #edeaff;
+  --text-2: #9b96be;
+  --panel-2: rgba(255, 255, 255, 0.09);
+  --modal-bg: rgba(15, 12, 30, 0.98);
+}
+
+* { scrollbar-width: thin; scrollbar-color: rgba(124,77,255,0.35) transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: rgba(124,77,255,0.35); border-radius: 999px; }
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-grad);
+  background-attachment: fixed;
+  color: var(--text-1);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid var(--glass-brd);
+    box-shadow: var(--glass-shadow);
+  }
+  .glass-2 {
+    background: var(--panel-2);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-brd);
+  }
+  /* Modals & dropdowns — fully opaque solid dark/light bg so text is always readable */
+  .modal-panel {
+    background: var(--modal-bg);
+    border: 1px solid var(--glass-brd);
+    box-shadow: 0 32px 80px -16px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(124,77,255,0.12);
+  }
+  /* Solid popover cards (dropdown menus in topbar) */
+  .popover {
+    background: var(--modal-bg);
+    border: 1px solid var(--glass-brd);
+    box-shadow: 0 20px 60px -12px rgba(0,0,0,0.6);
+  }
+  .text-muted { color: var(--text-2); }
+  .text-strong { color: var(--text-1); }
+  /* Vazirmatn has no emoji glyphs — force color emoji fonts (important beats inherited Vazirmatn) */
+  .emoji {
+    font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif !important;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+  }
+  /* Consistent inset select arrow; native arrows sit against the edge in RTL. */
+  .ui-select {
+    color-scheme: light;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235a5675' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-position: left 0.875rem center;
+    background-repeat: no-repeat;
+    background-size: 1rem;
+    padding-left: 2.5rem;
+  }
+  .dark .ui-select {
+    color-scheme: dark;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239b96be' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  }
+  .ui-select option,
+  .ui-select optgroup {
+    background-color: var(--modal-bg);
+    color: var(--text-1);
+  }
+  .ring-brand { box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.25); }
+  .grad-brand { background-image: linear-gradient(135deg, #7c4dff 0%, #b8a6ff 100%); }
+  .grad-text {
+    background-image: linear-gradient(135deg, #7c4dff 0%, #06b6d4 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+}
+
+/* Use transform:none in `to` so fixed children are not trapped by a leftover containing-block transform */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pageIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes scanline { 0% { top: 6%; } 50% { top: 92%; } 100% { top: 6%; } }
+@keyframes pulseGlow { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes shimmer { 100% { transform: translateX(-100%); } }
+
+.anim-fade-up { animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+.anim-fade-in { animation: fadeIn 0.4s ease both; }
+.anim-page-in { animation: pageIn 0.22s ease both; }
+.anim-scale-in { animation: scaleIn 0.28s cubic-bezier(0.22,1,0.36,1) both; }
+.anim-float { animation: float 5s ease-in-out infinite; }
+.anim-scan { animation: scanline 2.2s ease-in-out infinite; }
+.anim-spin-slow { animation: spinSlow 1s linear infinite; }
+
+.stagger > * { animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+.stagger > *:nth-child(1) { animation-delay: 0.03s; }
+.stagger > *:nth-child(2) { animation-delay: 0.07s; }
+.stagger > *:nth-child(3) { animation-delay: 0.11s; }
+.stagger > *:nth-child(4) { animation-delay: 0.15s; }
+.stagger > *:nth-child(5) { animation-delay: 0.19s; }
+.stagger > *:nth-child(6) { animation-delay: 0.23s; }
+.stagger > *:nth-child(7) { animation-delay: 0.27s; }
+.stagger > *:nth-child(8) { animation-delay: 0.31s; }
+
+.hover-lift { transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s; }
+.hover-lift:hover { transform: translateY(-4px); box-shadow: 0 22px 50px -16px rgba(76,30,130,0.32); }
+.press { transition: transform 0.12s ease; }
+.press:active { transform: scale(0.97); }
+
+/* iOS Safari zooms focused form controls when font-size < 16px */
+@supports (-webkit-touch-callout: none) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="image"]):not([type="file"]):not([type="hidden"]),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}

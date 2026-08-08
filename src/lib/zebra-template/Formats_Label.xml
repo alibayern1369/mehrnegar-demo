@@ -1,0 +1,398 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EuroPlus.NiceLabel Type="Format">
+  <Id>103345d5-a766-4e15-84d9-fc18d7db9167</Id>
+  <Name>Label</Name>
+  <SampleValue Type="StringContents" />
+  <BackgroundDocumentItem Type="BackgroundDocumentItem">
+    <Id>81e1bb67-e3fe-4303-95e2-945c3f025968</Id>
+    <Name>Picture</Name>
+    <Color>FFFFFFFF</Color>
+    <SampleValue Type="StringContents" />
+    <PrintAsGraphics>False</PrintAsGraphics>
+    <Geometry Type="RectGeometry">
+      <Width>0</Width>
+      <Height>0</Height>
+      <Left>0</Left>
+      <Top>0</Top>
+      <AnchoringPoint>4</AnchoringPoint>
+    </Geometry>
+    <CropVariableGraphics>False</CropVariableGraphics>
+    <ZOrder>0</ZOrder>
+    <MergeName>Picture</MergeName>
+  </BackgroundDocumentItem>
+  <Media Type="FormatMedia">
+    <PaperFormat>256</PaperFormat>
+    <PaperDetails Type="PaperDetails">
+      <Id>256</Id>
+      <Name>User defined</Name>
+      <IsCustomEpsonPaper>True</IsCustomEpsonPaper>
+    </PaperDetails>
+    <Type>1</Type>
+    <Width>92000</Width>
+    <Height>30000</Height>
+    <MediaUnit>2</MediaUnit>
+    <RfidTag Type="RfidTagDefinition">
+      <RfidSecurity Type="RfidTagSecurity">
+        <Version>0</Version>
+      </RfidSecurity>
+      <FormatReference Type="FormatReference">
+        <Id>103345d5-a766-4e15-84d9-fc18d7db9167</Id>
+      </FormatReference>
+    </RfidTag>
+    <EpsonMediaTypeId>0</EpsonMediaTypeId>
+    <IsEpsonBorderlessPrintingEnabled>False</IsEpsonBorderlessPrintingEnabled>
+  </Media>
+  <PageLayout Type="WebFormatLayout">
+    <WebSettings>21</WebSettings>
+    <HorizontalCount>2</HorizontalCount>
+    <VerticalCount>1</VerticalCount>
+    <HorizontalGap>1000</HorizontalGap>
+    <VerticalGap>0</VerticalGap>
+    <ElementWidth>45000</ElementWidth>
+    <ElementHeight>30000</ElementHeight>
+    <HorizontalRadius>1000</HorizontalRadius>
+    <VerticalRadius>1000</VerticalRadius>
+  </PageLayout>
+  <DocumentDesigns>
+    <DocumentDesign Type="FormatDocumentDesign">
+      <Id>27d22da0-e440-4987-bb1a-de75e1035be6</Id>
+      <Name>Document Design</Name>
+      <SampleValue Type="StringContents" />
+      <Type>0</Type>
+      <Items>
+        <Item Type="TextDocumentItem">
+          <Id>8a383b27-194b-4408-b423-4e5177889bca</Id>
+          <Name>Text</Name>
+          <FontDescriptor Type="FontDescriptor">
+            <Name>Yu Gothic Medium</Name>
+            <Height>8.2</Height>
+            <Width>5.7188763596535</Width>
+            <Color>FF000000</Color>
+            <LogFontWrapper Type="LogFontWrapper">
+              <Height>-23</Height>
+              <Width>16</Width>
+              <Weight>700</Weight>
+              <CharSet>1</CharSet>
+              <Quality>1</Quality>
+              <PitchAndFamily>0</PitchAndFamily>
+              <FaceName>Yu Gothic Medium</FaceName>
+            </LogFontWrapper>
+          </FontDescriptor>
+          <Color>FF000000</Color>
+          <SampleValue Type="StringContents" />
+          <PrintAsGraphics>False</PrintAsGraphics>
+          <Geometry Type="PositionGeometry">
+            <X>7290.19236368093</X>
+            <Y>3136.79469371767</Y>
+          </Geometry>
+          <FixedContents>تاپ یقه دلبری شنل</FixedContents>
+          <Contents Type="ExtendedDataValue">
+            <FixedValue Type="StringContents">
+              <StringValue>تاپ یقه دلبری شنل</StringValue>
+            </FixedValue>
+          </Contents>
+          <ScaleFactor>70.1045833943032</ScaleFactor>
+          <BestFitMinimumFontSize>4</BestFitMinimumFontSize>
+          <BestFitMaximumFontSize>72</BestFitMaximumFontSize>
+          <TextBoxAlignment>2</TextBoxAlignment>
+          <ZOrder>10001</ZOrder>
+          <MergeName>Text</MergeName>
+        </Item>
+        <Item Type="TextDocumentItem">
+          <Id>2c2afa7c-2dc5-4f96-a124-a39b7af56cb3</Id>
+          <Name>Text_1</Name>
+          <FontDescriptor Type="FontDescriptor">
+            <Name>Yu Gothic UI</Name>
+            <Height>7.8</Height>
+            <Width>5.06123527470606</Width>
+            <Color>FF000000</Color>
+            <LogFontWrapper Type="LogFontWrapper">
+              <Height>-22</Height>
+              <Width>14</Width>
+              <CharSet>1</CharSet>
+              <Quality>1</Quality>
+              <PitchAndFamily>0</PitchAndFamily>
+              <FaceName>Yu Gothic UI</FaceName>
+            </LogFontWrapper>
+          </FontDescriptor>
+          <Color>FF000000</Color>
+          <SampleValue Type="StringContents" />
+          <PrintAsGraphics>False</PrintAsGraphics>
+          <Geometry Type="PositionGeometry">
+            <X>16346.5072240101</X>
+            <Y>8319.0818226601</Y>
+          </Geometry>
+          <FixedContents>size : free</FixedContents>
+          <Contents Type="ExtendedDataValue">
+            <FixedValue Type="StringContents">
+              <StringValue>size : free</StringValue>
+            </FixedValue>
+          </Contents>
+          <ScaleFactor>118.915597310802</ScaleFactor>
+          <BestFitMinimumFontSize>4</BestFitMinimumFontSize>
+          <BestFitMaximumFontSize>72</BestFitMaximumFontSize>
+          <ZOrder>10002</ZOrder>
+          <MergeName>Text_1</MergeName>
+        </Item>
+        <Item Type="TextDocumentItem">
+          <Id>b3954883-a1fc-4c47-9fd0-1abdee5ddcdb</Id>
+          <Name>Text_2</Name>
+          <FontDescriptor Type="FontDescriptor">
+            <Name>Yu Gothic Medium</Name>
+            <Height>13</Height>
+            <Width>0</Width>
+            <Color>FF000000</Color>
+            <LogFontWrapper Type="LogFontWrapper">
+              <Height>-37</Height>
+              <Width>0</Width>
+              <Weight>700</Weight>
+              <CharSet>1</CharSet>
+              <Quality>1</Quality>
+              <PitchAndFamily>0</PitchAndFamily>
+              <FaceName>Yu Gothic Medium</FaceName>
+            </LogFontWrapper>
+          </FontDescriptor>
+          <Color>FF000000</Color>
+          <SampleValue Type="StringContents" />
+          <PrintAsGraphics>False</PrintAsGraphics>
+          <Geometry Type="PositionGeometry">
+            <X>8766.7886190117</X>
+            <Y>12862.5235163413</Y>
+          </Geometry>
+          <FixedContents>price : 880 t</FixedContents>
+          <Contents Type="ExtendedDataValue">
+            <FixedValue Type="StringContents">
+              <StringValue>price : 880 t</StringValue>
+            </FixedValue>
+          </Contents>
+          <BestFitMinimumFontSize>4</BestFitMinimumFontSize>
+          <BestFitMaximumFontSize>72</BestFitMaximumFontSize>
+          <TextBoxAlignment>2</TextBoxAlignment>
+          <ZOrder>10003</ZOrder>
+          <MergeName>Text_2</MergeName>
+        </Item>
+        <Item Type="TextDocumentItem">
+          <Id>1f26f94e-83ad-478a-afe0-dd4822cf4108</Id>
+          <Name>Text_3</Name>
+          <FontDescriptor Type="FontDescriptor">
+            <Name>Yu Gothic UI Light</Name>
+            <Height>7.8</Height>
+            <Width>5.16467239609603</Width>
+            <Color>FF000000</Color>
+            <LogFontWrapper Type="LogFontWrapper">
+              <Height>-22</Height>
+              <Width>15</Width>
+              <CharSet>1</CharSet>
+              <Quality>1</Quality>
+              <PitchAndFamily>0</PitchAndFamily>
+              <FaceName>Yu Gothic UI Light</FaceName>
+            </LogFontWrapper>
+          </FontDescriptor>
+          <Color>FF000000</Color>
+          <SampleValue Type="StringContents" />
+          <PrintAsGraphics>False</PrintAsGraphics>
+          <Geometry Type="PositionGeometry">
+            <X>62943.3200295317</X>
+            <Y>2794.56150534591</Y>
+          </Geometry>
+          <FixedContents>تاپ خشتی پاندا</FixedContents>
+          <Contents Type="ExtendedDataValue">
+            <FixedValue Type="StringContents">
+              <StringValue>تاپ خشتی پاندا</StringValue>
+            </FixedValue>
+          </Contents>
+          <ScaleFactor>121.345890787905</ScaleFactor>
+          <BestFitMinimumFontSize>4</BestFitMinimumFontSize>
+          <BestFitMaximumFontSize>72</BestFitMaximumFontSize>
+          <TextBoxAlignment>2</TextBoxAlignment>
+          <ZOrder>10006</ZOrder>
+          <MergeName>Text_3</MergeName>
+        </Item>
+        <Item Type="TextDocumentItem">
+          <Id>0561a823-2719-4c22-9b7e-228ad85e3912</Id>
+          <Name>Text_1_1</Name>
+          <FontDescriptor Type="FontDescriptor">
+            <Name>Yu Gothic UI Light</Name>
+            <Height>7.8</Height>
+            <Width>0</Width>
+            <Color>FF000000</Color>
+            <LogFontWrapper Type="LogFontWrapper">
+              <Height>-22</Height>
+              <Width>0</Width>
+              <CharSet>1</CharSet>
+              <Quality>1</Quality>
+              <PitchAndFamily>0</PitchAndFamily>
+              <FaceName>Yu Gothic UI Light</FaceName>
+            </LogFontWrapper>
+          </FontDescriptor>
+          <Color>FF000000</Color>
+          <SampleValue Type="StringContents" />
+          <PrintAsGraphics>False</PrintAsGraphics>
+          <Geometry Type="PositionGeometry">
+            <X>68467.9644197279</X>
+            <Y>8319.08200712788</Y>
+          </Geometry>
+          <FixedContents>size : free</FixedContents>
+          <Contents Type="ExtendedDataValue">
+            <FixedValue Type="StringContents">
+              <StringValue>size : free</StringValue>
+            </FixedValue>
+          </Contents>
+          <BestFitMinimumFontSize>4</BestFitMinimumFontSize>
+          <BestFitMaximumFontSize>72</BestFitMaximumFontSize>
+          <ZOrder>10007</ZOrder>
+          <MergeName>Text_1_1</MergeName>
+        </Item>
+        <Item Type="TextDocumentItem">
+          <Id>f0d6c0f1-8711-4bf8-9e28-794cc9edb3ec</Id>
+          <Name>Text_2_1</Name>
+          <FontDescriptor Type="FontDescriptor">
+            <Name>Yu Gothic UI Light</Name>
+            <Height>7.8</Height>
+            <Width>5.21138109375405</Width>
+            <Color>FF000000</Color>
+            <LogFontWrapper Type="LogFontWrapper">
+              <Height>-22</Height>
+              <Width>15</Width>
+              <Weight>700</Weight>
+              <CharSet>1</CharSet>
+              <Quality>1</Quality>
+              <PitchAndFamily>0</PitchAndFamily>
+              <FaceName>Yu Gothic UI Light</FaceName>
+            </LogFontWrapper>
+          </FontDescriptor>
+          <Color>FF000000</Color>
+          <SampleValue Type="StringContents" />
+          <PrintAsGraphics>False</PrintAsGraphics>
+          <Geometry Type="PositionGeometry">
+            <X>63285.5800598914</X>
+            <Y>14479.1643072919</Y>
+          </Geometry>
+          <FixedContents>price : 480  t</FixedContents>
+          <Contents Type="ExtendedDataValue">
+            <FixedValue Type="StringContents">
+              <StringValue>price : 480  t</StringValue>
+            </FixedValue>
+          </Contents>
+          <ScaleFactor>113.024611328213</ScaleFactor>
+          <BestFitMinimumFontSize>4</BestFitMinimumFontSize>
+          <BestFitMaximumFontSize>72</BestFitMaximumFontSize>
+          <TextBoxAlignment>2</TextBoxAlignment>
+          <ZOrder>10008</ZOrder>
+          <MergeName>Text_2_1</MergeName>
+        </Item>
+        <Item Type="BarcodeDocumentItem">
+          <Id>54eef60b-ae6a-450c-b052-503de54439f8</Id>
+          <Name>Barcode_1</Name>
+          <Color>FF000000</Color>
+          <BarcodeData Type="Code128BarcodeData">
+            <HasCheckDigit>False</HasCheckDigit>
+            <AutomaticCheckDigit>True</AutomaticCheckDigit>
+            <HasManualEncoding>False</HasManualEncoding>
+            <BaseBarWidth>125.12315270936</BaseBarWidth>
+            <UserBarWidth>125.12315270936</UserBarWidth>
+            <ModuleHeight>2094.7669627199</ModuleHeight>
+            <UserRatio>0</UserRatio>
+            <HumanInterpretationFontDescriptor Type="FontDescriptor">
+              <Name>Arial</Name>
+              <Height>10</Height>
+              <Width>0</Width>
+              <Color>FF000000</Color>
+              <LogFontWrapper Type="LogFontWrapper">
+                <Height>28</Height>
+                <Width>0</Width>
+                <Weight>700</Weight>
+                <CharSet>1</CharSet>
+                <Quality>1</Quality>
+                <PitchAndFamily>0</PitchAndFamily>
+                <FaceName>Arial</FaceName>
+              </LogFontWrapper>
+            </HumanInterpretationFontDescriptor>
+          </BarcodeData>
+          <SampleValue Type="StringContents">
+            <StringValue>123456789012</StringValue>
+            <UserValue>123456789012</UserValue>
+          </SampleValue>
+          <PrintAsGraphics>False</PrintAsGraphics>
+          <Geometry Type="PositionGeometry">
+            <X>67832.3610323415</X>
+            <Y>22220.0507561394</Y>
+          </Geometry>
+          <FixedContents>101808070</FixedContents>
+          <ZOrder>10009</ZOrder>
+          <MergeName>Barcode_1</MergeName>
+        </Item>
+        <Item Type="BarcodeDocumentItem">
+          <Id>34f0c7c7-dfca-49c7-949b-2bc396879d32</Id>
+          <Name>Barcode_2</Name>
+          <Color>FF000000</Color>
+          <BarcodeData Type="Code128ABarcodeData">
+            <HasCheckDigit>False</HasCheckDigit>
+            <AutomaticCheckDigit>True</AutomaticCheckDigit>
+            <HasManualEncoding>False</HasManualEncoding>
+            <BaseBarWidth>125.12315270936</BaseBarWidth>
+            <UserBarWidth>125.12315270936</UserBarWidth>
+            <ModuleHeight>4141.03395061728</ModuleHeight>
+            <UserRatio>0</UserRatio>
+            <AutoFontScaling>False</AutoFontScaling>
+            <IsCustomHumanReadableFont>True</IsCustomHumanReadableFont>
+            <DisplayCheckDigit>False</DisplayCheckDigit>
+            <HumanInterpretationFontDescriptor Type="FontDescriptor">
+              <Name>Arial</Name>
+              <Height>7</Height>
+              <Width>0</Width>
+              <Color>FF000000</Color>
+              <LogFontWrapper Type="LogFontWrapper">
+                <Height>20</Height>
+                <Width>0</Width>
+                <Weight>700</Weight>
+                <CharSet>1</CharSet>
+                <Quality>1</Quality>
+                <PitchAndFamily>0</PitchAndFamily>
+                <FaceName>Arial</FaceName>
+              </LogFontWrapper>
+            </HumanInterpretationFontDescriptor>
+          </BarcodeData>
+          <SampleValue Type="StringContents">
+            <StringValue>123456789012</StringValue>
+            <UserValue>123456789012</UserValue>
+          </SampleValue>
+          <PrintAsGraphics>True</PrintAsGraphics>
+          <Geometry Type="PositionGeometry">
+            <X>24115.7317523324</X>
+            <Y>20111.8410533366</Y>
+            <AnchoringPoint>1</AnchoringPoint>
+          </Geometry>
+          <UsageType>1</UsageType>
+          <FixedContents Base64Encoded="true">MTA4MDE4MDg3DQo=</FixedContents>
+          <ZOrder>10010</ZOrder>
+          <MergeName>Barcode_2</MergeName>
+        </Item>
+      </Items>
+      <Height>30000</Height>
+      <Width>45000</Width>
+      <MergeName>Document Design</MergeName>
+    </DocumentDesign>
+  </DocumentDesigns>
+  <PrintScenarioCollection>
+    <PrintScenarioCollection Type="PrintScenario">
+      <Id>9deeed8f-63b5-4df5-a7dd-1d18729172dd</Id>
+      <Name>Print Scenario</Name>
+      <SampleValue Type="StringContents" />
+      <Printer Type="Printer">
+        <DevModeBuffer>WgBEAGUAcwBpAGcAbgBlAHIAIABHAEsAOAA4ADgAdAAgACgARQBQAEwAKQAAAAAAAAAAAAAAAAAAAAAAAAAAAAEEAATcAP0FD28FAAEAAAEsAZgDAAACAAQAywABAAEAywABAAAAVQBzAGUAcgAgAGQAZQBmAGkAbgBlAGQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBSTlAAAAAAAAABAAQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMsADwAAAI+7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACYAwAALAEAAMsAAADLAAAAAgAAAAIAAAAAAAAAAAAAAAcAAABMAAAAAgAAAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAAAAAABAAAAAAAAAAAAAAADAAAACAAAAAAAAAAAAAAAAAAAAAAWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB7JAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJH0KAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdgAEAFAAngJaRGVzaWduZXIgR0s4ODh0IChFUEwpAAAAAAAAAAAAAAEAVFBNUgMA/QFkAE5JQ0VMYmw2NA==</DevModeBuffer>
+        <Name>ZDesigner GK888t (EPL)</Name>
+        <DriverName>ZDesigner GK888t (EPL)</DriverName>
+      </Printer>
+      <CutterDefinition Type="CutterDefinition">
+        <CutterProcessingType>0</CutterProcessingType>
+      </CutterDefinition>
+      <PrintRotation>1</PrintRotation>
+      <MergeName>Print Scenario</MergeName>
+    </PrintScenarioCollection>
+  </PrintScenarioCollection>
+  <OriginalFileName>C:\Users\Kavak computer\Documents\لیبل\Label.nlbl</OriginalFileName>
+  <OriginalTimeStamp>46019.5650842593</OriginalTimeStamp>
+  <DocumentProperties Type="DocumentProperties" />
+  <MergeName>Label</MergeName>
+</EuroPlus.NiceLabel>
