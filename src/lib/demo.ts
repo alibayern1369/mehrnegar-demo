@@ -1,4 +1,7 @@
-/** Public demo / portfolio deploy helpers. Never enable on production with real customer data. */
+/** Demo repository helpers. */
+
+/** Default branding asset (served from /public). */
+export const DEMO_APP_LOGO = "/logo.png";
 
 export type DemoAccount = {
   username: string;
@@ -28,7 +31,12 @@ export function isDemoMode(): boolean {
 }
 
 export function demoModeBlockedMessage(): string {
-  return "در نسخه دمو این عملیات غیرفعال است";
+  return "این عملیات در محیط نمایشی امکان‌پذیر نیست";
+}
+
+export function resolveAppLogo(stored: string | null | undefined): string | null {
+  if (stored?.trim()) return stored;
+  return isDemoMode() ? DEMO_APP_LOGO : null;
 }
 
 export function findDemoAccount(username: string): DemoAccount | undefined {

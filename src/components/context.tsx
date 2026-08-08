@@ -67,8 +67,13 @@ function applyFavicon(logo: string | null) {
       link.rel = "icon";
       document.head.appendChild(link);
     }
-    link.type = logo.startsWith("data:image/svg") ? "image/svg+xml" : "image/png";
-    link.href = logo;
+    if (logo.startsWith("/")) {
+      link.type = "image/png";
+      link.href = logo;
+    } else {
+      link.type = logo.startsWith("data:image/svg") ? "image/svg+xml" : "image/png";
+      link.href = logo;
+    }
   }
 
   let apple = document.getElementById("app-apple-touch") as HTMLLinkElement | null;

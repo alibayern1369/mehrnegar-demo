@@ -62,20 +62,8 @@ export function Shell() {
   const [userOpen, setUserOpen]   = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const [stockNotifs, setStockNotifs] = useState<StockNotif[]>([]);
-  const [demoMode, setDemoMode] = useState(false);
 
   const can = (perm?: AppPermissionId) => !perm || hasPermission(user, perm);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetch("/api/demo")
-      .then((r) => r.json())
-      .then((d) => {
-        if (!cancelled && d?.ok && d.demo) setDemoMode(true);
-      })
-      .catch(() => { /* ignore */ });
-    return () => { cancelled = true; };
-  }, []);
 
   useEffect(() => {
     if (!token) {
@@ -161,11 +149,6 @@ export function Shell() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      {demoMode && (
-        <div className="z-40 bg-emerald-600 px-4 py-2 text-center text-xs font-semibold text-white sm:text-sm">
-          نسخه دمو — داده آزمایشی است؛ سورس کامل خصوصی نگه داشته شده و برای رزومه منتشر شده
-        </div>
-      )}
       <div className="flex min-h-0 flex-1">
       <aside className={`sticky top-0 z-30 hidden h-screen shrink-0 flex-col p-3 transition-[width] duration-300 md:flex ${collapsed ? "w-20" : "w-60"}`}>
         <div className={`modal-panel flex h-full flex-col overflow-hidden rounded-3xl ${collapsed ? "p-2" : "p-3"}`}>

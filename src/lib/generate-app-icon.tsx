@@ -1,6 +1,9 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { ensureSeeded } from "@/mock/ensure-seeded";
 import { getStore } from "@/mock/store";
+import { resolveAppLogo } from "@/lib/demo";
 
 export type AppBrandingIcon = { appName: string; appLogo: string | null };
 
@@ -10,10 +13,10 @@ export async function loadBrandingIcon(): Promise<AppBrandingIcon> {
     const s = getStore().appSettings[0];
     return {
       appName: s?.appName?.trim() || "مهرنگار",
-      appLogo: s?.appLogo ?? null,
+      appLogo: resolveAppLogo(s?.appLogo),
     };
   } catch {
-    return { appName: "مهرنگار", appLogo: null };
+    return { appName: "مهرنگار", appLogo: resolveAppLogo(null) };
   }
 }
 
@@ -53,12 +56,30 @@ function fallbackIcon(size: number, letter: string) {
 
 const RASTER = new Set(["image/png", "image/jpeg", "image/jpg", "image/webp"]);
 
+async function staticLogoResponse(relativePath: string, headers: Record<string, string>): Promise<Response | null> {
+  if (!relativePath.startsWith("/")) return null;
+  try {
+    const filePath = path.join(process.cwd(), "public", relativePath.slice(1));
+    const bytes = await readFile(filePath);
+    const ext = path.extname(filePath).toLowerCase();
+    const type = ext === ".jpg" ? "image/jpeg" : ext === ".webp" ? "image/webp" : "image/png";
+    return new Response(Buffer.from(bytes), { headers: { ...headers, "Content-Type": type } });
+  } catch {
+    return null;
+  }
+}
+
 export async function appIconResponse(size: number): Promise<Response> {
   const { appName, appLogo } = await loadBrandingIcon();
   const letter = (appName || "م").charAt(0) || "م";
   const headers = {
     "Cache-Control": "public, max-age=0, must-revalidate",
   };
+
+  if (appLogo?.startsWith("/")) {
+    const staticRes = await staticLogoResponse(appLogo, headers);
+    if (staticRes) return staticRes;
+  }
 
   if (appLogo?.startsWith("data:image/")) {
     const parsed = parseDataUrl(appLogo);

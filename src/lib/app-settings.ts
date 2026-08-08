@@ -1,5 +1,6 @@
 import { getStore, nextId } from "@/mock/store";
 import { randomBytes } from "crypto";
+import { resolveAppLogo } from "@/lib/demo";
 import { DEFAULT_DEVELOPER_URL } from "@/lib/version";
 
 export function generateSetupLoginToken(): string {
@@ -58,7 +59,7 @@ export function publicAppSettings(row: {
 }) {
   return {
     appName: row.appName || "مهرنگار",
-    appLogo: row.appLogo ?? null,
+    appLogo: resolveAppLogo(row.appLogo),
     developerUrl: row.developerUrl?.trim() || DEFAULT_DEVELOPER_URL,
   };
 }

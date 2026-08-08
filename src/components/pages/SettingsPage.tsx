@@ -553,15 +553,19 @@ export function SettingsPage() {
           <Field label="نام نرم‌افزار">
             <Input value={appName} onChange={(e) => setAppName(e.target.value)} placeholder="مهرنگار" />
           </Field>
-          <Field label={`لینک ${DEFAULT_DEVELOPER_NAME}`}>
-            <Input
-              value={developerUrl}
-              onChange={(e) => setDeveloperUrl(e.target.value)}
-              placeholder={DEFAULT_DEVELOPER_URL}
-              dir="ltr"
-            />
-          </Field>
-          <p className="text-[11px] text-muted -mt-2">این لینک در صفحه ورود زیر «طراحی و توسعه» نمایش داده می‌شود.</p>
+          {!demoMode && (
+            <>
+              <Field label={`لینک ${DEFAULT_DEVELOPER_NAME}`}>
+                <Input
+                  value={developerUrl}
+                  onChange={(e) => setDeveloperUrl(e.target.value)}
+                  placeholder={DEFAULT_DEVELOPER_URL}
+                  dir="ltr"
+                />
+              </Field>
+              <p className="text-[11px] text-muted -mt-2">این لینک در صفحه ورود زیر «طراحی و توسعه» نمایش داده می‌شود.</p>
+            </>
+          )}
           <div className="flex justify-end">
             <Btn onClick={saveBranding} disabled={saving}>
               {saving ? <I.refresh className="anim-spin-slow" /> : <I.check width={16} />} ذخیره برندینگ
@@ -729,7 +733,7 @@ export function SettingsPage() {
       {tab === "system" && (
         <Glass className="p-6 space-y-4">
           <h3 className="font-bold text-strong">اطلاعات سیستم</h3>
-          {[["نسخه", APP_VERSION_FA], ["پایگاه داده", "PostgreSQL"], ["وضعیت", "سالم"], ["طراحی و توسعه", DEFAULT_DEVELOPER_NAME]].map(([l, v]) => (
+          {[["نسخه", APP_VERSION_FA], ["پایگاه داده", "In-memory"], ["وضعیت", "سالم"], ...(demoMode ? [] : [["طراحی و توسعه", DEFAULT_DEVELOPER_NAME] as [string, string]])].map(([l, v]) => (
             <div key={l} className="flex justify-between rounded-2xl glass-2 px-4 py-3 text-sm">
               <span className="text-muted">{l}</span><span className="font-bold text-strong">{v}</span>
             </div>
@@ -764,7 +768,7 @@ export function SettingsPage() {
             </p>
             {demoMode && (
               <p className="text-xs text-amber-700 dark:text-amber-300">
-                در نسخه دمو حذف انبوه محصولات تست و صفر کردن نرم‌افزار قفل است.
+                حذف انبوه و بازنشانی داده در این محیط غیرفعال است.
               </p>
             )}
             <div className="flex flex-wrap gap-2">
@@ -801,7 +805,7 @@ export function SettingsPage() {
                 قبل از ادامه حتماً پشتیبان بگیرید. فقط کاربر راه‌اندازی به این بخش دسترسی دارد.
               </p>
               <Btn variant="danger" onClick={openResetModal} disabled={demoMode || resetting || seeding || purgingTest}>
-                <I.trash width={16} /> {demoMode ? "در دمو غیرفعال است" : "صفر کردن و شروع از اول"}
+                <I.trash width={16} /> {demoMode ? "غیرفعال" : "صفر کردن و شروع از اول"}
               </Btn>
             </div>
           )}

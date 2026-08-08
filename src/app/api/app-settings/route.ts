@@ -1,5 +1,6 @@
 import { ensureSeeded, getStore, nextId } from "@/mock";
 import { getCurrentUserAsync, isManager } from "@/mock/auth-helpers";
+import { resolveAppLogo } from "@/lib/demo";
 import { DEFAULT_DEVELOPER_URL } from "@/lib/version";
 import { randomBytes } from "crypto";
 
@@ -12,7 +13,7 @@ function publicAppSettings(row: {
 }) {
   return {
     appName: row.appName || "مهرنگار",
-    appLogo: row.appLogo ?? null,
+    appLogo: resolveAppLogo(row.appLogo),
     developerUrl: row.developerUrl?.trim() || DEFAULT_DEVELOPER_URL,
   };
 }

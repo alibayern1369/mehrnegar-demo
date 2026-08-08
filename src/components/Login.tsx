@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { I } from "./icons";
 import { Btn, Toggle } from "./ui";
 import { useApp } from "./context";
-import { APP_VERSION_FA, DEFAULT_DEVELOPER_NAME, DEFAULT_DEVELOPER_URL } from "@/lib/version";
+import { APP_VERSION_FA } from "@/lib/version";
 
 type Mode = "otp" | "setup";
 type OtpStep = 1 | 2 | 3;
@@ -18,10 +18,7 @@ type DemoAccountInfo = {
 
 type DemoInfo = {
   demo: boolean;
-  title?: string;
-  note?: string;
   accounts?: DemoAccountInfo[];
-  tips?: string[];
 };
 
 export function Login() {
@@ -52,8 +49,6 @@ export function Login() {
   const verifyingRef = useRef(false);
   const lastTriedRef = useRef("");
   const codeBoxRef = useRef<HTMLDivElement>(null);
-
-  const developerUrl = branding.developerUrl || DEFAULT_DEVELOPER_URL;
 
   useEffect(() => {
     let cancelled = false;
@@ -200,7 +195,7 @@ export function Login() {
       setStep(3);
       verifyingRef.current = false;
       lastTriedRef.current = "";
-      toast(data.demoCode ? `کد آزمایشی: ${data.demoCode}` : "کد ورود ارسال شد");
+      toast(data.demoCode ? `کد ورود: ${data.demoCode}` : "کد ورود ارسال شد");
     } catch {
       setError("خطا در اتصال به سرور");
     } finally {
@@ -257,12 +252,12 @@ export function Login() {
       });
       const data = await res.json();
       if (!data.ok) {
-        setError(data.error ?? "ورود دمو ناموفق بود");
+        setError(data.error ?? "ورود ناموفق بود");
         setLoading(false);
         return;
       }
       login(data.user, data.token);
-      toast(`ورود دمو — ${data.user.name}`);
+      toast(`خوش آمدید، ${data.user.name}`);
     } catch {
       setError("خطا در اتصال به سرور");
       setLoading(false);
@@ -360,23 +355,16 @@ export function Login() {
           </div>
           <div className="space-y-1 text-xs text-white/35">
             <p>نسخه {APP_VERSION_FA} — {branding.appName}</p>
-            <p>
-              طراحی و توسعه:{" "}
-              <a href={developerUrl} target="_blank" rel="noopener noreferrer" className="text-white/55 underline-offset-2 hover:text-white/80 hover:underline">
-                {DEFAULT_DEVELOPER_NAME}
-              </a>
-            </p>
           </div>
         </div>
 
         <div className="p-8 sm:p-10">
-          {demoInfo?.demo && (
+          {demoInfo?.demo && (demoInfo.accounts?.length ?? 0) > 0 && (
             <div
               className="mb-6 rounded-2xl px-4 py-3 text-sm text-white/80"
               style={{ background: "rgba(16,185,129,0.12)", border: "1px solid rgba(16,185,129,0.28)" }}
             >
-              <p className="font-bold text-emerald-300">{demoInfo.title ?? "نسخه دمو"}</p>
-              <p className="mt-1 text-xs leading-6 text-white/55">{demoInfo.note}</p>
+              <p className="font-bold text-emerald-300">ورود سریع</p>
               <div className="mt-3 space-y-2">
                 {(demoInfo.accounts ?? []).map((account) => (
                   <div
@@ -425,8 +413,17 @@ export function Login() {
           )}
 
           <div className="mb-8 flex flex-col items-center text-center">
-            <div className="mb-3 grid h-20 w-20 place-items-center rounded-full grad-brand text-3xl text-white shadow-xl shadow-brand-500/40 ring-4 ring-white/10">
-              {mode === "setup" ? "⚙️" : step === 2 ? "🔒" : "📱"}
+            <div
+              className={`mb-3 grid h-20 w-20 place-items-center overflow-hidden text-3xl text-white shadow-xl ring-4 ring-white/10 ${
+                branding.appLogo ? "" : "rounded-full grad-brand shadow-brand-500/40"
+              }`}
+            >
+              {branding.appLogo ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={branding.appLogo} alt={branding.appName} className="h-full w-full object-contain" />
+              ) : (
+                mode === "setup" ? "⚙️" : step === 2 ? "🔒" : "📱"
+              )}
             </div>
             <h1 className="text-xl font-extrabold text-white">
               {mode === "setup" ? "ورود راه‌اندازی" : otpTitle}
@@ -579,7 +576,7 @@ export function Login() {
               {demoCode && (
                 <div className="rounded-2xl px-4 py-3 text-center text-sm text-white/50"
                   style={{ background: "rgba(124,77,255,0.1)", border: "1px solid rgba(124,77,255,0.2)" }}>
-                  حالت آزمایشی (بدون credential): کد <span className="font-extrabold text-brand-300">{demoCode}</span>
+                  کد ورود: <span className="font-extrabold text-brand-300">{demoCode}</span>
                 </div>
               )}
               <Btn onClick={() => verifyOtp()} className="w-full !py-3" disabled={loading}>
@@ -617,12 +614,6 @@ export function Login() {
 
           <div className="mt-8 space-y-1 text-center text-[11px] text-white/30 md:hidden">
             <p>نسخه {APP_VERSION_FA} — {branding.appName}</p>
-            <p>
-              طراحی و توسعه:{" "}
-              <a href={developerUrl} target="_blank" rel="noopener noreferrer" className="text-white/45 underline-offset-2 hover:underline">
-                {DEFAULT_DEVELOPER_NAME}
-              </a>
-            </p>
           </div>
         </div>
       </div>
