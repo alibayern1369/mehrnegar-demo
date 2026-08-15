@@ -4,6 +4,7 @@ import {
   clearAdminCookieHeader,
   createAdminToken,
   getAdminCookieName,
+  setAdminPassword,
   verifyAdminPassword,
   verifyAdminToken,
 } from "@/lib/marketing/auth";
@@ -39,11 +40,13 @@ export async function POST(req: NextRequest) {
   const body = (await req.json().catch(() => ({}))) as {
     action?: string;
     password?: string;
+    currentPassword?: string;
+    newPassword?: string;
     content?: Partial<MarketingContent>;
   };
 
   if (body.action === "login") {
-    if (!verifyAdminPassword(body.password || "")) {
+    if (!(await verifyAdminPassword(body.password || ""))) {
       return NextResponse.json({ ok: false, error: "invalid_password" }, { status: 401 });
     }
     const token = createAdminToken();
@@ -60,6 +63,26 @@ export async function POST(req: NextRequest) {
 
   if (!verifyAdminToken(getToken(req))) {
     return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
+  }
+
+  if (body.action === "change-password") {
+    const current = body.currentPassword || "";
+    const next = (body.newPassword || "").trim();
+    if (!(await verifyAdminPassword(current))) {
+      return NextResponse.json({ ok: false, error: "invalid_password" }, { status: 401 });
+    }
+    if (next.length < 8) {
+      return NextResponse.json({ ok: false, error: "weak_password" }, { status: 400 });
+    }
+    if (next === current) {
+      return NextResponse.json({ ok: false, error: "same_password" }, { status: 400 });
+    }
+    try {
+      await setAdminPassword(next);
+    } catch {
+      return NextResponse.json({ ok: false, error: "save_failed" }, { status: 500 });
+    }
+    return NextResponse.json({ ok: true });
   }
 
   if (body.action === "save" && body.content) {

@@ -70,6 +70,27 @@ const paths: Record<string, ReactNode> = {
       <path d="M4 20a8 8 0 0 1 16 0" />
     </>
   ),
+  offline: (
+    <>
+      <path d="M2 8.5a16 16 0 0 1 20 0" />
+      <path d="M5 12.5a11 11 0 0 1 14 0" />
+      <path d="M8.5 16a6 6 0 0 1 7 0" />
+      <path d="m9 21 2.2 2.2L16 18" />
+    </>
+  ),
+  sync: (
+    <>
+      <path d="M21 12a9 9 0 0 0-15.5-6.4L3 8" />
+      <path d="M3 3v5h5" />
+      <path d="M3 12a9 9 0 0 0 15.5 6.4L21 16" />
+      <path d="M21 21v-5h-5" />
+    </>
+  ),
+  check: (
+    <>
+      <path d="M20 6 9 17l-5-5" />
+    </>
+  ),
 };
 
 export function MarketingIcon({ name, className }: IconProps) {

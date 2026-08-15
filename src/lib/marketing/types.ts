@@ -47,6 +47,7 @@ export type MarketingContent = {
   heroEyebrow: string;
   heroTitle: string;
   heroSubtitle: string;
+  heroHighlights: string[];
   primaryCtaText: string;
   primaryCtaHref: string;
   secondaryCtaText: string;

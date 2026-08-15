@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { MarketingContent } from "@/lib/marketing/types";
 import { MarketingIcon } from "./MarketingIcon";
+import { MarketingHeader } from "./MarketingHeader";
 import { ContactForm, RecaptchaScript } from "./ContactForm";
 import "./marketing.css";
 
@@ -8,46 +9,42 @@ type Props = { content: MarketingContent };
 
 export function LandingPage({ content: c }: Props) {
   const heroShot = c.screenshots[0];
+  const offlineFeature = c.features.find((f) => f.id === "offline");
+  const otherFeatures = c.features.filter((f) => f.id !== "offline");
 
   return (
     <div className="marketing-root">
       <RecaptchaScript siteKey={c.recaptchaSiteKey} />
 
-      <header className="m-nav">
-        <div className="m-container m-nav-inner">
-          <Link href="/" className="m-brand-mark" style={{ marginBottom: 0 }} aria-label={`${c.brandName} — صفحه اصلی`}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={c.logoUrl} alt={`لوگوی ${c.brandName}`} width={52} height={52} />
-            <span>{c.brandName}</span>
-          </Link>
-          <nav className="m-nav-links" aria-label="منوی اصلی">
-            <a href="#about">معرفی</a>
-            <a href="#features">امکانات</a>
-            <a href="#screens">نمایش نرم‌افزار</a>
-            <a href="#why">مزایا</a>
-            <a href="#faq">سوالات</a>
-            <a href="#contact">تماس</a>
-          </nav>
-          <div className="flex items-center gap-2">
-            <Link href={c.primaryCtaHref} className="m-btn m-btn-primary" style={{ padding: "0.65rem 1rem" }}>
-              دمو
-            </Link>
-          </div>
-        </div>
-      </header>
+      <MarketingHeader
+        brandName={c.brandName}
+        logoUrl={c.logoUrl}
+        primaryCtaHref={c.primaryCtaHref}
+        primaryCtaText={c.primaryCtaText}
+      />
 
       <main>
         <section className="m-hero m-container" aria-labelledby="hero-title">
           <div className="m-hero-grid">
-            <div className="m-reveal">
-              <p className="m-kicker">{c.heroEyebrow}</p>
-              <div className="m-brand-mark" style={{ marginTop: "1rem" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={c.logoUrl} alt="" width={56} height={56} aria-hidden />
-                <span>{c.brandName}</span>
-              </div>
+            <div>
+              <p className="m-hero-eyebrow">
+                <b>آفلاین</b>
+                {c.heroEyebrow}
+              </p>
               <h1 id="hero-title">{c.heroTitle}</h1>
               <p className="m-hero-copy">{c.heroSubtitle}</p>
+              {c.heroHighlights?.length > 0 && (
+                <ul className="m-hero-points">
+                  {c.heroHighlights.map((item) => (
+                    <li key={item}>
+                      <span className="m-hero-check" aria-hidden>
+                        <MarketingIcon name="check" className="h-3 w-3" />
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              )}
               <div className="m-cta-row">
                 <Link href={c.primaryCtaHref} className="m-btn m-btn-primary">
                   {c.primaryCtaText}
@@ -56,11 +53,26 @@ export function LandingPage({ content: c }: Props) {
                   {c.secondaryCtaText}
                 </a>
               </div>
+              <div className="m-hero-meta" aria-label="ویژگی‌های کلیدی">
+                <span className="m-chip">کار بدون اینترنت</span>
+                <span className="m-chip">فروش و فاکتور</span>
+                <span className="m-chip">موجودی و انبار</span>
+                <span className="m-chip">رابط فارسی</span>
+              </div>
             </div>
 
-            <div className="m-hero-visual m-reveal" style={{ animationDelay: "0.12s" }}>
+            <div className="m-hero-visual">
+              <aside className="m-float-card m-float-tl">
+                <span className="m-float-card-icon">
+                  <MarketingIcon name="offline" />
+                </span>
+                <span>
+                  <b>حالت آفلاین فعال</b>
+                  <span>قطعی اینترنت فروش را متوقف نمی‌کند</span>
+                </span>
+              </aside>
               {heroShot?.demoLabel && <span className="m-demo-badge">{heroShot.demoLabel}</span>}
-              <div className="m-device m-glass">
+              <div className="m-device">
                 <div className="m-device-bar" aria-hidden>
                   <span className="m-device-dot" />
                   <span className="m-device-dot" />
@@ -80,6 +92,15 @@ export function LandingPage({ content: c }: Props) {
                   />
                 )}
               </div>
+              <aside className="m-float-card m-float-br">
+                <span className="m-float-card-icon">
+                  <MarketingIcon name="sync" />
+                </span>
+                <span>
+                  <b>همگام‌سازی خودکار</b>
+                  <span>بعد از وصل شدن اینترنت، داده از دست نمی‌رود</span>
+                </span>
+              </aside>
             </div>
           </div>
         </section>
@@ -94,7 +115,7 @@ export function LandingPage({ content: c }: Props) {
                 <h3 className="text-lg font-black">نرم افزار حسابداری مهرنگار</h3>
                 <p className="mt-2 text-[0.98rem] leading-8 text-[var(--m-muted)]">
                   مهرنگار با تمرکز روی حسابداری فروش، مدیریت مشتریان و کنترل موجودی، جایگزین ابزارهای پراکنده می‌شود
-                  و تصویر یکپارچه‌ای از کسب‌وکار می‌سازد.
+                  و تصویر یکپارچه‌ای از کسب‌وکار می‌سازد — حتی وقتی اینترنت در دسترس نیست.
                 </p>
               </article>
               <article className="m-glass m-card">
@@ -119,6 +140,7 @@ export function LandingPage({ content: c }: Props) {
                     src={shot.src}
                     alt={shot.alt}
                     loading="lazy"
+                    decoding="async"
                     className="w-full rounded-xl"
                     width={960}
                     height={640}
@@ -150,9 +172,21 @@ export function LandingPage({ content: c }: Props) {
             <h2 className="m-title">{c.featuresTitle}</h2>
             <p className="m-lead">{c.featuresSubtitle}</p>
             <div className="m-grid-3 mt-8">
-              {c.features.map((f) => (
+              {offlineFeature && (
+                <article className="m-glass m-card m-card-featured">
+                  <div className="m-icon m-icon-accent">
+                    <MarketingIcon name={offlineFeature.icon} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-black text-[#0b7a6e]">تأکید محصول</p>
+                    <h3 className="mt-1 text-lg font-black">{offlineFeature.title}</h3>
+                    <p className="mt-2 text-sm leading-7 text-[var(--m-muted)]">{offlineFeature.description}</p>
+                  </div>
+                </article>
+              )}
+              {otherFeatures.map((f) => (
                 <article key={f.id} className="m-glass m-card">
-                  <div className="m-icon">
+                  <div className={`m-icon${f.id === "sync" ? " m-icon-accent" : ""}`}>
                     <MarketingIcon name={f.icon} />
                   </div>
                   <h3 className="text-base font-black">{f.title}</h3>
@@ -170,7 +204,7 @@ export function LandingPage({ content: c }: Props) {
             <p className="m-lead">{c.benefitsSubtitle}</p>
             <div className="m-grid-3 mt-8">
               {c.benefits.map((b) => (
-                <article key={b.id} className="m-glass m-card">
+                <article key={b.id} className={`m-glass m-card${b.id === "offline" ? " m-card-featured" : ""}`}>
                   <h3 className="text-base font-black">{b.title}</h3>
                   <p className="mt-2 text-sm leading-7 text-[var(--m-muted)]">{b.description}</p>
                 </article>

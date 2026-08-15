@@ -16,7 +16,7 @@ export function MarketingJsonLd({ content: c }: { content: MarketingContent }) {
     "@type": "SoftwareApplication",
     name: c.brandName,
     applicationCategory: "BusinessApplication",
-    operatingSystem: "Web",
+    operatingSystem: "Web, Offline",
     inLanguage: "fa",
     description: c.seoDescription,
     url: c.siteUrl,

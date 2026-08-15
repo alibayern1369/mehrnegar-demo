@@ -1,4 +1,5 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
+export { verifyAdminPassword, setAdminPassword } from "./credentials";
 
 const COOKIE_NAME = "mehrnegar_mkt_admin";
 const MAX_AGE_SEC = 60 * 60 * 24 * 7;
@@ -11,10 +12,6 @@ function secret(): string {
   );
 }
 
-function expectedPassword(): string {
-  return process.env.MARKETING_ADMIN_PASSWORD || "mehrnegar-admin";
-}
-
 function sign(payload: string): string {
   return createHmac("sha256", secret()).update(payload).digest("hex");
 }
@@ -25,19 +22,6 @@ export function getAdminCookieName() {
 
 export function getAdminCookieMaxAge() {
   return MAX_AGE_SEC;
-}
-
-export function verifyAdminPassword(password: string): boolean {
-  const expected = expectedPassword();
-  if (!password || !expected) return false;
-  const a = Buffer.from(password);
-  const b = Buffer.from(expected);
-  if (a.length !== b.length) return false;
-  try {
-    return timingSafeEqual(a, b);
-  } catch {
-    return false;
-  }
 }
 
 export function createAdminToken(): string {

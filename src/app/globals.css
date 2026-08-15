@@ -48,7 +48,7 @@
 *::-webkit-scrollbar-thumb { background: rgba(124,77,255,0.35); border-radius: 999px; }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   scrollbar-gutter: stable;
 }
 body {

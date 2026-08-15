@@ -57,6 +57,10 @@ export async function getMarketingContent(): Promise<MarketingContent> {
         memoryCache.siteUrl ||
         process.env.NEXT_PUBLIC_SITE_URL ||
         DEFAULT_MARKETING_CONTENT.siteUrl,
+      heroHighlights:
+        memoryCache.heroHighlights?.length > 0
+          ? memoryCache.heroHighlights
+          : DEFAULT_MARKETING_CONTENT.heroHighlights,
     };
   }
 

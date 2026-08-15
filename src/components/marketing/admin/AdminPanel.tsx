@@ -132,6 +132,11 @@ export function AdminPanel() {
   const [tab, setTab] = useState(FIELD_GROUPS[0].id);
   const [status, setStatus] = useState("");
   const [saving, setSaving] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordStatus, setPasswordStatus] = useState("");
+  const [changingPassword, setChangingPassword] = useState(false);
 
   const load = useCallback(async () => {
     setChecking(true);
@@ -220,6 +225,54 @@ export function AdminPanel() {
     }
   }
 
+  async function changePassword(e: FormEvent) {
+    e.preventDefault();
+    setPasswordStatus("");
+    if (newPassword.length < 8) {
+      setPasswordStatus("رمز جدید باید حداقل ۸ کاراکتر باشد.");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setPasswordStatus("تکرار رمز جدید مطابقت ندارد.");
+      return;
+    }
+    setChangingPassword(true);
+    try {
+      const res = await fetch("/api/marketing/admin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "change-password",
+          currentPassword,
+          newPassword,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.status === 401 || data.error === "invalid_password") {
+        setPasswordStatus("رمز فعلی نادرست است.");
+        return;
+      }
+      if (data.error === "weak_password") {
+        setPasswordStatus("رمز جدید باید حداقل ۸ کاراکتر باشد.");
+        return;
+      }
+      if (data.error === "same_password") {
+        setPasswordStatus("رمز جدید نباید با رمز فعلی یکسان باشد.");
+        return;
+      }
+      if (!res.ok || !data.ok) {
+        setPasswordStatus("تغییر رمز ناموفق بود.");
+        return;
+      }
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+      setPasswordStatus("رمز عبور پنل با موفقیت تغییر کرد.");
+    } finally {
+      setChangingPassword(false);
+    }
+  }
+
   const activeGroup = useMemo(() => FIELD_GROUPS.find((g) => g.id === tab) || FIELD_GROUPS[0], [tab]);
 
   if (checking) {
@@ -236,8 +289,7 @@ export function AdminPanel() {
         <form onSubmit={login} className="m-glass-strong m-card w-full max-w-md space-y-4">
           <h1 className="text-xl font-black">مدیریت محتوای مهرنگار</h1>
           <p className="text-sm text-[var(--m-muted)]">
-            برای ویرایش لندینگ، با رمز ادمین وارد شوید. رمز از متغیر محیطی{" "}
-            <code dir="ltr">MARKETING_ADMIN_PASSWORD</code> خوانده می‌شود.
+            برای ویرایش لندینگ، با رمز ادمین وارد شوید. پس از ورود می‌توانید رمز را از داخل پنل تغییر دهید.
           </p>
           <Field label="رمز عبور" value={password} onChange={setPassword} type="password" />
           <button className="m-btn m-btn-primary w-full" type="submit">
@@ -314,6 +366,15 @@ export function AdminPanel() {
               ))}
               <button
                 type="button"
+                onClick={() => setTab("security")}
+                className={`w-full rounded-xl px-3 py-2 text-right text-sm font-bold transition ${
+                  tab === "security" ? "bg-[rgba(91,77,255,0.12)] text-[var(--m-brand)]" : "text-[var(--m-muted)]"
+                }`}
+              >
+                امنیت و رمز عبور
+              </button>
+              <button
+                type="button"
                 onClick={() => setTab("lists")}
                 className={`w-full rounded-xl px-3 py-2 text-right text-sm font-bold transition ${
                   tab === "lists" ? "bg-[rgba(91,77,255,0.12)] text-[var(--m-brand)]" : "text-[var(--m-muted)]"
@@ -324,7 +385,41 @@ export function AdminPanel() {
             </aside>
 
             <section className="m-glass-strong m-card space-y-4">
-              {tab === "lists" ? (
+              {tab === "security" ? (
+                <form className="space-y-4" onSubmit={changePassword}>
+                  <h2 className="text-lg font-black">تغییر رمز ورود به پنل</h2>
+                  <p className="text-sm leading-7 text-[var(--m-muted)]">
+                    رمز جدید جایگزین رمز فعلی می‌شود و برای ورود بعدی به{" "}
+                    <code dir="ltr">/admin</code> استفاده خواهد شد. حداقل ۸ کاراکتر وارد کنید.
+                  </p>
+                  <Field
+                    label="رمز فعلی"
+                    value={currentPassword}
+                    onChange={setCurrentPassword}
+                    type="password"
+                  />
+                  <Field label="رمز جدید" value={newPassword} onChange={setNewPassword} type="password" />
+                  <Field
+                    label="تکرار رمز جدید"
+                    value={confirmPassword}
+                    onChange={setConfirmPassword}
+                    type="password"
+                  />
+                  <button className="m-btn m-btn-primary" type="submit" disabled={changingPassword}>
+                    {changingPassword ? "در حال ذخیره..." : "ذخیره رمز جدید"}
+                  </button>
+                  {passwordStatus && (
+                    <p
+                      className={`text-sm font-bold ${
+                        passwordStatus.includes("موفق") ? "text-teal-700" : "text-rose-600"
+                      }`}
+                      role="status"
+                    >
+                      {passwordStatus}
+                    </p>
+                  )}
+                </form>
+              ) : tab === "lists" ? (
                 <div className="space-y-4">
                   <p className="text-sm text-[var(--m-muted)]">
                     برای ویرایش آرایه‌ها (امکانات، مزایا، FAQ، اسکرین‌شات‌ها و ...) از حالت JSON استفاده کنید تا ساختار
@@ -353,11 +448,27 @@ export function AdminPanel() {
                         onChange={(v) => setContent({ ...content, [f.key]: v })}
                       />
                     ))}
+                    {tab === "hero" && (
+                      <Field
+                        label="نکات کلیدی هیرو (هر خط یک مورد)"
+                        type="textarea"
+                        value={(content.heroHighlights || []).join("\n")}
+                        onChange={(v) =>
+                          setContent({
+                            ...content,
+                            heroHighlights: v
+                              .split("\n")
+                              .map((line) => line.trim())
+                              .filter(Boolean),
+                          })
+                        }
+                      />
+                    )}
                   </div>
                 </>
               )}
 
-              {tab !== "lists" && (
+              {tab !== "lists" && tab !== "security" && (
                 <button className="m-btn m-btn-primary" type="button" disabled={saving} onClick={saveForm}>
                   {saving ? "در حال ذخیره..." : "ذخیره تغییرات"}
                 </button>
