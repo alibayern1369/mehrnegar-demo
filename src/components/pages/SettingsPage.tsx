@@ -522,7 +522,11 @@ export function SettingsPage() {
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-6">
-            <div className="grid h-28 w-28 place-items-center overflow-hidden rounded-3xl border border-white/15 bg-white/80 p-2">
+            <div
+              className={`grid h-28 w-28 place-items-center overflow-hidden ${
+                appLogo ? "" : "rounded-3xl border border-white/15 bg-white/80 p-2"
+              }`}
+            >
               {appLogo ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={appLogo} alt="لوگو" className="max-h-full max-w-full object-contain" />

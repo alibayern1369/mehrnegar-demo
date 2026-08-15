@@ -91,6 +91,12 @@ const paths: Record<string, ReactNode> = {
       <path d="M20 6 9 17l-5-5" />
     </>
   ),
+  settings: (
+    <>
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+    </>
+  ),
 };
 
 export function MarketingIcon({ name, className }: IconProps) {

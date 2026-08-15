@@ -414,8 +414,8 @@ export function Login() {
 
           <div className="mb-8 flex flex-col items-center text-center">
             <div
-              className={`mb-3 grid h-20 w-20 place-items-center overflow-hidden text-3xl text-white shadow-xl ring-4 ring-white/10 ${
-                branding.appLogo ? "" : "rounded-full grad-brand shadow-brand-500/40"
+              className={`mb-3 grid h-20 w-20 place-items-center overflow-hidden text-3xl text-white ${
+                branding.appLogo ? "" : "rounded-full grad-brand shadow-xl shadow-brand-500/40 ring-4 ring-white/10"
               }`}
             >
               {branding.appLogo ? (

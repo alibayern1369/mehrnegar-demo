@@ -182,14 +182,19 @@ body:has(.marketing-root) {
 }
 
 .m-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
   margin: 0;
   text-decoration: none;
   color: inherit;
 }
 
 .m-nav-brand img {
-  width: 2.45rem;
-  height: 2.45rem;
+  width: 2.35rem;
+  height: 2.35rem;
+  object-fit: contain;
+  display: block;
 }
 
 .m-nav-brand span {
@@ -233,27 +238,6 @@ body:has(.marketing-root) {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.m-nav-offline {
-  display: none;
-  align-items: center;
-  gap: 0.4rem;
-  border-radius: 999px;
-  padding: 0.38rem 0.7rem;
-  font-size: 0.75rem;
-  font-weight: 800;
-  color: #0b7a6e;
-  background: rgba(15, 157, 142, 0.1);
-  border: 1px solid rgba(15, 157, 142, 0.18);
-  white-space: nowrap;
-}
-
-.m-nav-offline-dot {
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 999px;
-  background: #12b89a;
 }
 
 .m-nav-consult,
@@ -305,7 +289,6 @@ body:has(.marketing-root) {
     display: flex;
   }
 
-  .m-nav-offline,
   .m-nav-consult {
     display: inline-flex;
   }
@@ -342,9 +325,10 @@ body:has(.marketing-root) {
 }
 
 .m-brand-mark img {
-  width: 3.1rem;
-  height: 3.1rem;
+  width: 2.75rem;
+  height: 2.75rem;
   object-fit: contain;
+  display: block;
 }
 
 .m-brand-mark span {
@@ -356,23 +340,14 @@ body:has(.marketing-root) {
 .m-hero-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
   border-radius: 999px;
-  padding: 0.38rem 0.75rem 0.38rem 0.45rem;
+  padding: 0.38rem 0.85rem;
   background: #fff;
   border: 1px solid var(--m-line);
   box-shadow: var(--m-shadow);
   font-size: 0.78rem;
   font-weight: 800;
   color: var(--m-ink);
-}
-
-.m-hero-eyebrow b {
-  border-radius: 999px;
-  padding: 0.18rem 0.5rem;
-  background: rgba(15, 157, 142, 0.12);
-  color: #0b7a6e;
-  font-size: 0.7rem;
 }
 
 .m-hero h1 {

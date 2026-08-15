@@ -9,8 +9,6 @@ type Props = { content: MarketingContent };
 
 export function LandingPage({ content: c }: Props) {
   const heroShot = c.screenshots[0];
-  const offlineFeature = c.features.find((f) => f.id === "offline");
-  const otherFeatures = c.features.filter((f) => f.id !== "offline");
 
   return (
     <div className="marketing-root">
@@ -27,10 +25,7 @@ export function LandingPage({ content: c }: Props) {
         <section className="m-hero m-container" aria-labelledby="hero-title">
           <div className="m-hero-grid">
             <div>
-              <p className="m-hero-eyebrow">
-                <b>آفلاین</b>
-                {c.heroEyebrow}
-              </p>
+              <p className="m-hero-eyebrow">{c.heroEyebrow}</p>
               <h1 id="hero-title">{c.heroTitle}</h1>
               <p className="m-hero-copy">{c.heroSubtitle}</p>
               {c.heroHighlights?.length > 0 && (
@@ -54,31 +49,21 @@ export function LandingPage({ content: c }: Props) {
                 </a>
               </div>
               <div className="m-hero-meta" aria-label="ویژگی‌های کلیدی">
-                <span className="m-chip">کار بدون اینترنت</span>
                 <span className="m-chip">فروش و فاکتور</span>
                 <span className="m-chip">موجودی و انبار</span>
-                <span className="m-chip">رابط فارسی</span>
+                <span className="m-chip">گزارش حرفه‌ای</span>
+                <span className="m-chip">شخصی‌سازی</span>
               </div>
             </div>
 
             <div className="m-hero-visual">
-              <aside className="m-float-card m-float-tl">
-                <span className="m-float-card-icon">
-                  <MarketingIcon name="offline" />
-                </span>
-                <span>
-                  <b>حالت آفلاین فعال</b>
-                  <span>قطعی اینترنت فروش را متوقف نمی‌کند</span>
-                </span>
-              </aside>
-              {heroShot?.demoLabel && <span className="m-demo-badge">{heroShot.demoLabel}</span>}
               <div className="m-device">
                 <div className="m-device-bar" aria-hidden>
                   <span className="m-device-dot" />
                   <span className="m-device-dot" />
                   <span className="m-device-dot" />
                   <span className="mr-auto text-[11px] font-bold text-[var(--m-muted)]">
-                    {c.brandName} DEMO
+                    {c.brandName}
                   </span>
                 </div>
                 {heroShot && (
@@ -92,15 +77,6 @@ export function LandingPage({ content: c }: Props) {
                   />
                 )}
               </div>
-              <aside className="m-float-card m-float-br">
-                <span className="m-float-card-icon">
-                  <MarketingIcon name="sync" />
-                </span>
-                <span>
-                  <b>همگام‌سازی خودکار</b>
-                  <span>بعد از وصل شدن اینترنت، داده از دست نمی‌رود</span>
-                </span>
-              </aside>
             </div>
           </div>
         </section>
@@ -114,8 +90,8 @@ export function LandingPage({ content: c }: Props) {
               <article className="m-glass m-card">
                 <h3 className="text-lg font-black">نرم افزار حسابداری مهرنگار</h3>
                 <p className="mt-2 text-[0.98rem] leading-8 text-[var(--m-muted)]">
-                  مهرنگار با تمرکز روی حسابداری فروش، مدیریت مشتریان و کنترل موجودی، جایگزین ابزارهای پراکنده می‌شود
-                  و تصویر یکپارچه‌ای از کسب‌وکار می‌سازد — حتی وقتی اینترنت در دسترس نیست.
+                  مهرنگار با تمرکز روی حسابداری فروش، مدیریت مشتریان، کنترل موجودی و گزارش‌های حرفه‌ای، جایگزین
+                  ابزارهای پراکنده می‌شود و تصویر یکپارچه‌ای از کسب‌وکار می‌سازد.
                 </p>
               </article>
               <article className="m-glass m-card">
@@ -134,7 +110,6 @@ export function LandingPage({ content: c }: Props) {
             <div className="m-shot-grid mt-8">
               {c.screenshots.map((shot) => (
                 <figure key={shot.id} className="m-glass m-card relative overflow-hidden p-3">
-                  {shot.demoLabel && <span className="m-demo-badge">{shot.demoLabel}</span>}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={shot.src}
@@ -152,7 +127,7 @@ export function LandingPage({ content: c }: Props) {
               ))}
               <aside className="m-glass-strong m-card m-shot-cta flex flex-col justify-center md:flex-row md:items-center md:justify-between gap-4">
                 <div>
-                  <h3 className="text-xl font-black">تجربه زنده نسخه DEMO</h3>
+                  <h3 className="text-xl font-black">تجربه زنده نسخه نمایشی</h3>
                   <p className="mt-3 text-[0.98rem] leading-8 text-[var(--m-muted)] max-w-2xl">
                     بدون تغییر در هسته نرم‌افزار، می‌توانید محیط واقعی مهرنگار را برای فروش، انبار، مشتریان و گزارش‌ها
                     آزمایش کنید.
@@ -172,21 +147,12 @@ export function LandingPage({ content: c }: Props) {
             <h2 className="m-title">{c.featuresTitle}</h2>
             <p className="m-lead">{c.featuresSubtitle}</p>
             <div className="m-grid-3 mt-8">
-              {offlineFeature && (
-                <article className="m-glass m-card m-card-featured">
-                  <div className="m-icon m-icon-accent">
-                    <MarketingIcon name={offlineFeature.icon} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-black text-[#0b7a6e]">تأکید محصول</p>
-                    <h3 className="mt-1 text-lg font-black">{offlineFeature.title}</h3>
-                    <p className="mt-2 text-sm leading-7 text-[var(--m-muted)]">{offlineFeature.description}</p>
-                  </div>
-                </article>
-              )}
-              {otherFeatures.map((f) => (
-                <article key={f.id} className="m-glass m-card">
-                  <div className={`m-icon${f.id === "sync" ? " m-icon-accent" : ""}`}>
+              {c.features.map((f) => (
+                <article
+                  key={f.id}
+                  className={`m-glass m-card${f.id === "reports" || f.id === "custom" ? " m-card-featured" : ""}`}
+                >
+                  <div className={`m-icon${f.id === "reports" || f.id === "custom" ? " m-icon-accent" : ""}`}>
                     <MarketingIcon name={f.icon} />
                   </div>
                   <h3 className="text-base font-black">{f.title}</h3>
@@ -204,7 +170,10 @@ export function LandingPage({ content: c }: Props) {
             <p className="m-lead">{c.benefitsSubtitle}</p>
             <div className="m-grid-3 mt-8">
               {c.benefits.map((b) => (
-                <article key={b.id} className={`m-glass m-card${b.id === "offline" ? " m-card-featured" : ""}`}>
+                <article
+                  key={b.id}
+                  className={`m-glass m-card${b.id === "reporting" || b.id === "custom" ? " m-card-featured" : ""}`}
+                >
                   <h3 className="text-base font-black">{b.title}</h3>
                   <p className="mt-2 text-sm leading-7 text-[var(--m-muted)]">{b.description}</p>
                 </article>
@@ -287,7 +256,7 @@ export function LandingPage({ content: c }: Props) {
               <p className="m-kicker">ارتباط</p>
               <h2 className="m-title">{c.contactTitle}</h2>
               <p className="m-lead">
-                برای مشاوره، استقرار یا شروع همکاری با تیم مهرنگار در ارتباط باشید.
+                برای مشاوره، شخصی‌سازی امکانات یا شروع همکاری با تیم مهرنگار در ارتباط باشید.
               </p>
               <ul className="mt-6 space-y-3 text-sm font-semibold text-[var(--m-muted)]">
                 {c.contactEmail && (

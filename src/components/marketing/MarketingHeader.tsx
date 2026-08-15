@@ -42,7 +42,7 @@ export function MarketingHeader({ brandName, logoUrl, primaryCtaHref, primaryCta
   return (
     <header className={`m-nav${scrolled ? " is-scrolled" : ""}`}>
       <div className="m-container m-nav-inner">
-        <Link href="/" className="m-brand-mark m-nav-brand" aria-label={`${brandName} — صفحه اصلی`}>
+        <Link href="/" className="m-nav-brand" aria-label={`${brandName} — صفحه اصلی`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={logoUrl} alt={`لوگوی ${brandName}`} width={40} height={40} />
           <span>
@@ -60,10 +60,6 @@ export function MarketingHeader({ brandName, logoUrl, primaryCtaHref, primaryCta
         </nav>
 
         <div className="m-nav-actions">
-          <span className="m-nav-offline" title="کار بدون اینترنت">
-            <span className="m-nav-offline-dot" aria-hidden />
-            کار آفلاین
-          </span>
           <a href="#contact" className="m-btn m-btn-ghost m-nav-consult">
             مشاوره
           </a>

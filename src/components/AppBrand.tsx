@@ -24,20 +24,20 @@ export function AppBrand({
   const letter = (name || "م").trim().charAt(0) || "م";
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <div
-        className={`grid shrink-0 place-items-center overflow-hidden ${sizeClass} ${
-          logo
-            ? ""
-            : "rounded-2xl grad-brand text-white shadow-lg"
-        }`}
-      >
-        {logo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={logo} alt={name} className="h-full w-full object-contain" />
-        ) : (
+      {logo ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={logo}
+          alt={name}
+          className={`shrink-0 object-contain ${sizeClass}`}
+        />
+      ) : (
+        <div
+          className={`grid shrink-0 place-items-center overflow-hidden rounded-2xl grad-brand text-white shadow-lg ${sizeClass}`}
+        >
           <span className={`font-black ${textClass}`}>{letter}</span>
-        )}
-      </div>
+        </div>
+      )}
       {showText && (
         <div className="min-w-0 flex-1">
           <p className="truncate font-extrabold text-strong">{name}</p>

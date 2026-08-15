@@ -14,7 +14,7 @@ type StoredCredentials = {
 let cache: StoredCredentials | null | undefined;
 
 function envFallbackPassword(): string {
-  return process.env.MARKETING_ADMIN_PASSWORD || "mehrnegar-admin";
+  return process.env.MARKETING_ADMIN_PASSWORD || "123";
 }
 
 async function readStored(): Promise<StoredCredentials | null> {
