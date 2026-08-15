@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState, type FormEvent } from "react";
-import type { MarketingContent } from "@/lib/marketing/types";
+import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from "react";
+import type { MarketingContent, MarketingScreenshot } from "@/lib/marketing/types";
 import "../marketing.css";
 
 type AdminContent = Omit<MarketingContent, "recaptchaSecretKey"> & {
@@ -33,6 +33,8 @@ const FIELD_GROUPS: {
     fields: [
       { key: "aboutTitle", label: "عنوان معرفی" },
       { key: "aboutBody", label: "متن معرفی", type: "textarea" },
+      { key: "aboutProductTitle", label: "عنوان کارت محصول" },
+      { key: "aboutProductBody", label: "متن کارت محصول", type: "textarea" },
       { key: "aboutAudienceTitle", label: "عنوان مخاطبان" },
       { key: "aboutAudienceBody", label: "متن مخاطبان", type: "textarea" },
     ],
@@ -48,19 +50,18 @@ const FIELD_GROUPS: {
       { key: "ogDescription", label: "OG Description", type: "textarea" },
       { key: "twitterTitle", label: "Twitter Title" },
       { key: "twitterDescription", label: "Twitter Description", type: "textarea" },
-      { key: "ogImageUrl", label: "آدرس تصویر OG" },
       { key: "siteUrl", label: "Canonical / Site URL" },
     ],
   },
   {
     id: "brand",
-    title: "برند و تصاویر",
+    title: "برند",
     fields: [
       { key: "brandName", label: "نام برند" },
-      { key: "logoUrl", label: "آدرس لوگو" },
-      { key: "faviconUrl", label: "آدرس Favicon" },
       { key: "screenshotsTitle", label: "عنوان بخش اسکرین‌شات" },
       { key: "screenshotsSubtitle", label: "توضیح بخش اسکرین‌شات", type: "textarea" },
+      { key: "screensCtaTitle", label: "عنوان CTA اسکرین‌شات" },
+      { key: "screensCtaBody", label: "متن CTA اسکرین‌شات", type: "textarea" },
     ],
   },
   {
@@ -82,6 +83,7 @@ const FIELD_GROUPS: {
     title: "تماس و کلیدها",
     fields: [
       { key: "contactTitle", label: "عنوان تماس" },
+      { key: "contactLead", label: "متن معرفی تماس", type: "textarea" },
       { key: "contactEmail", label: "ایمیل" },
       { key: "contactPhone", label: "تلفن" },
       { key: "contactWhatsapp", label: "واتساپ" },
@@ -122,6 +124,113 @@ function Field({
   );
 }
 
+function ImageUploadCard({
+  label,
+  hint,
+  value,
+  slot,
+  uploading,
+  onUploadStart,
+  onUploaded,
+  onUploadEnd,
+  onClear,
+}: {
+  label: string;
+  hint?: string;
+  value: string;
+  slot: string;
+  uploading: boolean;
+  onUploadStart: () => void;
+  onUploaded: (url: string) => void;
+  onUploadEnd: () => void;
+  onClear?: () => void;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [error, setError] = useState("");
+
+  async function onPick(file: File | null) {
+    setError("");
+    if (!file) return;
+    onUploadStart();
+    const form = new FormData();
+    form.append("file", file);
+    form.append("slot", slot);
+    try {
+      const res = await fetch("/api/marketing/upload", { method: "POST", body: form });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        const map: Record<string, string> = {
+          unauthorized: "نشست منقضی شده؛ دوباره وارد شوید.",
+          file_too_large: "حجم فایل حداکثر ۱٫۵ مگابایت باشد.",
+          invalid_type: "فقط PNG، JPG، WebP، SVG یا ICO مجاز است.",
+          save_failed: "ذخیره فایل روی سرور ناموفق بود.",
+        };
+        setError(map[data.error] || "آپلود ناموفق بود.");
+        return;
+      }
+      onUploaded(String(data.url));
+    } catch {
+      setError("خطا در ارتباط با سرور.");
+    } finally {
+      onUploadEnd();
+    }
+  }
+
+  return (
+    <div className="m-upload-card">
+      <div className="m-upload-preview">
+        {value ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={value} alt={label} />
+        ) : (
+          <span className="m-upload-empty">بدون تصویر</span>
+        )}
+      </div>
+      <div className="m-upload-meta">
+        <p className="m-upload-label">{label}</p>
+        {hint && <p className="m-upload-hint">{hint}</p>}
+        {value && (
+          <p className="m-upload-path" dir="ltr" title={value}>
+            {value}
+          </p>
+        )}
+        <div className="m-upload-actions">
+          <input
+            ref={inputRef}
+            type="file"
+            accept="image/png,image/jpeg,image/webp,image/svg+xml,image/x-icon,.ico"
+            className="sr-only"
+            onChange={(e) => {
+              void onPick(e.target.files?.[0] ?? null);
+              e.target.value = "";
+            }}
+          />
+          <button
+            type="button"
+            className="m-btn m-btn-primary"
+            style={{ padding: "0.55rem 0.95rem" }}
+            disabled={uploading}
+            onClick={() => inputRef.current?.click()}
+          >
+            {uploading ? "در حال آپلود..." : "انتخاب از سیستم"}
+          </button>
+          {onClear && value && (
+            <button
+              type="button"
+              className="m-btn m-btn-secondary"
+              style={{ padding: "0.55rem 0.95rem" }}
+              onClick={onClear}
+            >
+              حذف
+            </button>
+          )}
+        </div>
+        {error && <p className="text-sm font-bold text-rose-600">{error}</p>}
+      </div>
+    </div>
+  );
+}
+
 export function AdminPanel() {
   const [authed, setAuthed] = useState(false);
   const [checking, setChecking] = useState(true);
@@ -132,6 +241,7 @@ export function AdminPanel() {
   const [tab, setTab] = useState(FIELD_GROUPS[0].id);
   const [status, setStatus] = useState("");
   const [saving, setSaving] = useState(false);
+  const [uploadingSlot, setUploadingSlot] = useState<string | null>(null);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -275,6 +385,16 @@ export function AdminPanel() {
 
   const activeGroup = useMemo(() => FIELD_GROUPS.find((g) => g.id === tab) || FIELD_GROUPS[0], [tab]);
 
+  const navItems = useMemo(
+    () => [
+      ...FIELD_GROUPS,
+      { id: "images", title: "لوگو و تصاویر" },
+      { id: "security", title: "امنیت و رمز عبور" },
+      { id: "lists", title: "لیست‌ها (FAQ / امکانات / ...)" },
+    ],
+    [],
+  );
+
   if (checking) {
     return (
       <div className="marketing-root grid min-h-screen place-items-center">
@@ -302,6 +422,39 @@ export function AdminPanel() {
   }
 
   if (!content) return null;
+
+  function updateScreenshot(index: number, patch: Partial<MarketingScreenshot>) {
+    setContent((prev) => {
+      if (!prev) return prev;
+      const screenshots = [...(prev.screenshots || [])];
+      screenshots[index] = { ...screenshots[index], ...patch };
+      return { ...prev, screenshots };
+    });
+  }
+
+  function addScreenshot() {
+    setContent((prev) => {
+      if (!prev) return prev;
+      const id = `shot-${Date.now()}`;
+      return {
+        ...prev,
+        screenshots: [
+          ...(prev.screenshots || []),
+          { id, src: "", alt: "", caption: "اسکرین‌شات جدید" },
+        ],
+      };
+    });
+  }
+
+  function removeScreenshot(index: number) {
+    setContent((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        screenshots: (prev.screenshots || []).filter((_, i) => i !== index),
+      };
+    });
+  }
 
   return (
     <div className="marketing-root min-h-screen">
@@ -352,7 +505,7 @@ export function AdminPanel() {
         ) : (
           <div className="grid gap-6 lg:grid-cols-[220px_1fr]">
             <aside className="m-glass m-card h-fit space-y-1 p-2">
-              {FIELD_GROUPS.map((g) => (
+              {navItems.map((g) => (
                 <button
                   key={g.id}
                   type="button"
@@ -364,24 +517,6 @@ export function AdminPanel() {
                   {g.title}
                 </button>
               ))}
-              <button
-                type="button"
-                onClick={() => setTab("security")}
-                className={`w-full rounded-xl px-3 py-2 text-right text-sm font-bold transition ${
-                  tab === "security" ? "bg-[rgba(91,77,255,0.12)] text-[var(--m-brand)]" : "text-[var(--m-muted)]"
-                }`}
-              >
-                امنیت و رمز عبور
-              </button>
-              <button
-                type="button"
-                onClick={() => setTab("lists")}
-                className={`w-full rounded-xl px-3 py-2 text-right text-sm font-bold transition ${
-                  tab === "lists" ? "bg-[rgba(91,77,255,0.12)] text-[var(--m-brand)]" : "text-[var(--m-muted)]"
-                }`}
-              >
-                لیست‌ها (FAQ / امکانات / ...)
-              </button>
             </aside>
 
             <section className="m-glass-strong m-card space-y-4">
@@ -419,11 +554,111 @@ export function AdminPanel() {
                     </p>
                   )}
                 </form>
+              ) : tab === "images" ? (
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="text-lg font-black">لوگو، فاویکن و تصاویر سایت</h2>
+                    <p className="mt-2 text-sm leading-7 text-[var(--m-muted)]">
+                      با دکمه «انتخاب از سیستم» تصویر را از رایانه خود آپلود کنید. پس از آپلود، حتماً «ذخیره
+                      تغییرات» را بزنید تا در سایت اعمال شود.
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h3 className="text-base font-black">برند</h3>
+                    <ImageUploadCard
+                      label="لوگوی سایت"
+                      hint="هدر، فوتر و هویت بصری لندینگ"
+                      value={content.logoUrl}
+                      slot="logo"
+                      uploading={uploadingSlot === "logo"}
+                      onUploadStart={() => setUploadingSlot("logo")}
+                      onUploadEnd={() => setUploadingSlot(null)}
+                      onUploaded={(url) => {
+                        setContent((prev) => (prev ? { ...prev, logoUrl: url } : prev));
+                        setStatus("لوگو آپلود شد — ذخیره تغییرات را بزنید.");
+                      }}
+                    />
+                    <ImageUploadCard
+                      label="فاویکن"
+                      hint="آیکون تب مرورگر (ترجیحاً مربع، PNG یا ICO)"
+                      value={content.faviconUrl}
+                      slot="favicon"
+                      uploading={uploadingSlot === "favicon"}
+                      onUploadStart={() => setUploadingSlot("favicon")}
+                      onUploadEnd={() => setUploadingSlot(null)}
+                      onUploaded={(url) => {
+                        setContent((prev) => (prev ? { ...prev, faviconUrl: url } : prev));
+                        setStatus("فاویکن آپلود شد — ذخیره تغییرات را بزنید.");
+                      }}
+                    />
+                    <ImageUploadCard
+                      label="تصویر اشتراک‌گذاری (OG)"
+                      hint="پیش‌نمایش لینک در شبکه‌های اجتماعی"
+                      value={content.ogImageUrl}
+                      slot="og"
+                      uploading={uploadingSlot === "og"}
+                      onUploadStart={() => setUploadingSlot("og")}
+                      onUploadEnd={() => setUploadingSlot(null)}
+                      onUploaded={(url) => {
+                        setContent((prev) => (prev ? { ...prev, ogImageUrl: url } : prev));
+                        setStatus("تصویر OG آپلود شد — ذخیره تغییرات را بزنید.");
+                      }}
+                    />
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <h3 className="text-base font-black">اسکرین‌شات‌ها و هیرو</h3>
+                      <button
+                        type="button"
+                        className="m-btn m-btn-secondary"
+                        style={{ padding: "0.55rem 0.95rem" }}
+                        onClick={addScreenshot}
+                      >
+                        افزودن تصویر
+                      </button>
+                    </div>
+                    <p className="text-sm text-[var(--m-muted)]">
+                      تصویر اول به‌عنوان نمایش هیرو استفاده می‌شود.
+                    </p>
+                    {(content.screenshots || []).map((shot, index) => (
+                      <div key={shot.id || index} className="space-y-3 rounded-2xl border border-[var(--m-line)] p-4">
+                        <ImageUploadCard
+                          label={index === 0 ? `تصویر هیرو / اسکرین‌شات ${index + 1}` : `اسکرین‌شات ${index + 1}`}
+                          hint={shot.caption || undefined}
+                          value={shot.src}
+                          slot={`shot-${shot.id || index}`}
+                          uploading={uploadingSlot === `shot-${shot.id || index}`}
+                          onUploadStart={() => setUploadingSlot(`shot-${shot.id || index}`)}
+                          onUploadEnd={() => setUploadingSlot(null)}
+                          onUploaded={(url) => {
+                            updateScreenshot(index, { src: url });
+                            setStatus("تصویر آپلود شد — ذخیره تغییرات را بزنید.");
+                          }}
+                          onClear={() => removeScreenshot(index)}
+                        />
+                        <div className="grid gap-3 md:grid-cols-2">
+                          <Field
+                            label="عنوان زیر تصویر"
+                            value={shot.caption}
+                            onChange={(v) => updateScreenshot(index, { caption: v })}
+                          />
+                          <Field
+                            label="متن جایگزین (alt)"
+                            value={shot.alt}
+                            onChange={(v) => updateScreenshot(index, { alt: v })}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               ) : tab === "lists" ? (
                 <div className="space-y-4">
                   <p className="text-sm text-[var(--m-muted)]">
-                    برای ویرایش آرایه‌ها (امکانات، مزایا، FAQ، اسکرین‌شات‌ها و ...) از حالت JSON استفاده کنید تا ساختار
-                    حفظ شود.
+                    برای ویرایش آرایه‌ها (امکانات، مزایا، FAQ و ...) از حالت JSON استفاده کنید تا ساختار حفظ شود.
+                    تصاویر اسکرین‌شات را از بخش «لوگو و تصاویر» آپلود کنید.
                   </p>
                   <button type="button" className="m-btn m-btn-secondary" onClick={() => setJsonMode(true)}>
                     باز کردن ویرایشگر JSON

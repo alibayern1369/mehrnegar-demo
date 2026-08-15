@@ -22,16 +22,38 @@ export function LandingPage({ content: c }: Props) {
       />
 
       <main>
-        <section className="m-hero m-container" aria-labelledby="hero-title">
-          <div className="m-hero-grid">
-            <div>
-              <p className="m-hero-eyebrow">{c.heroEyebrow}</p>
-              <h1 id="hero-title">{c.heroTitle}</h1>
-              <p className="m-hero-copy">{c.heroSubtitle}</p>
+        <section className="m-hero" aria-labelledby="hero-title">
+          <div className="m-hero-stage" aria-hidden>
+            <span className="m-hero-orb m-hero-orb-a" />
+            <span className="m-hero-orb m-hero-orb-b" />
+            <span className="m-hero-orb m-hero-orb-c" />
+            <span className="m-hero-grid-lines" />
+          </div>
+
+          <div className="m-container m-hero-grid">
+            <div className="m-hero-copy-col">
+              <p className="m-hero-brand m-reveal" style={{ ["--m-delay" as string]: "0ms" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={c.logoUrl} alt="" width={48} height={48} />
+                <span>{c.brandName}</span>
+              </p>
+              <p className="m-hero-eyebrow m-reveal" style={{ ["--m-delay" as string]: "80ms" }}>
+                {c.heroEyebrow}
+              </p>
+              <h1 id="hero-title" className="m-reveal" style={{ ["--m-delay" as string]: "160ms" }}>
+                {c.heroTitle}
+              </h1>
+              <p className="m-hero-copy m-reveal" style={{ ["--m-delay" as string]: "240ms" }}>
+                {c.heroSubtitle}
+              </p>
               {c.heroHighlights?.length > 0 && (
                 <ul className="m-hero-points">
-                  {c.heroHighlights.map((item) => (
-                    <li key={item}>
+                  {c.heroHighlights.map((item, i) => (
+                    <li
+                      key={item}
+                      className="m-reveal"
+                      style={{ ["--m-delay" as string]: `${320 + i * 70}ms` }}
+                    >
                       <span className="m-hero-check" aria-hidden>
                         <MarketingIcon name="check" className="h-3 w-3" />
                       </span>
@@ -40,7 +62,10 @@ export function LandingPage({ content: c }: Props) {
                   ))}
                 </ul>
               )}
-              <div className="m-cta-row">
+              <div
+                className="m-cta-row m-reveal"
+                style={{ ["--m-delay" as string]: `${320 + (c.heroHighlights?.length || 0) * 70 + 40}ms` }}
+              >
                 <Link href={c.primaryCtaHref} className="m-btn m-btn-primary">
                   {c.primaryCtaText}
                 </Link>
@@ -48,16 +73,14 @@ export function LandingPage({ content: c }: Props) {
                   {c.secondaryCtaText}
                 </a>
               </div>
-              <div className="m-hero-meta" aria-label="ویژگی‌های کلیدی">
-                <span className="m-chip">فروش و فاکتور</span>
-                <span className="m-chip">موجودی و انبار</span>
-                <span className="m-chip">گزارش حرفه‌ای</span>
-                <span className="m-chip">شخصی‌سازی</span>
-              </div>
             </div>
 
-            <div className="m-hero-visual">
-              <div className="m-device">
+            <div
+              className="m-hero-visual m-reveal"
+              style={{ ["--m-delay" as string]: "220ms" }}
+            >
+              <div className="m-hero-visual-glow" aria-hidden />
+              <div className="m-device m-device-float">
                 <div className="m-device-bar" aria-hidden>
                   <span className="m-device-dot" />
                   <span className="m-device-dot" />
@@ -82,28 +105,25 @@ export function LandingPage({ content: c }: Props) {
         </section>
 
         <section id="about" className="m-section">
-          <div className="m-container">
+          <div className="m-container m-section-head">
             <p className="m-kicker">معرفی محصول</p>
             <h2 className="m-title">{c.aboutTitle}</h2>
             <p className="m-lead">{c.aboutBody}</p>
             <div className="mt-8 grid gap-4 md:grid-cols-2">
-              <article className="m-glass m-card">
-                <h3 className="text-lg font-black">نرم افزار حسابداری مهرنگار</h3>
-                <p className="mt-2 text-[0.98rem] leading-8 text-[var(--m-muted)]">
-                  مهرنگار با تمرکز روی حسابداری فروش، مدیریت مشتریان، کنترل موجودی و گزارش‌های حرفه‌ای، جایگزین
-                  ابزارهای پراکنده می‌شود و تصویر یکپارچه‌ای از کسب‌وکار می‌سازد.
-                </p>
+              <article className="m-glass m-card m-prose-card">
+                <h3>{c.aboutProductTitle}</h3>
+                <p>{c.aboutProductBody}</p>
               </article>
-              <article className="m-glass m-card">
-                <h3 className="text-lg font-black">{c.aboutAudienceTitle}</h3>
-                <p className="mt-2 text-[0.98rem] leading-8 text-[var(--m-muted)]">{c.aboutAudienceBody}</p>
+              <article className="m-glass m-card m-prose-card">
+                <h3>{c.aboutAudienceTitle}</h3>
+                <p>{c.aboutAudienceBody}</p>
               </article>
             </div>
           </div>
         </section>
 
-        <section id="screens" className="m-section" style={{ paddingTop: 0 }}>
-          <div className="m-container">
+        <section id="screens" className="m-section m-section-tight">
+          <div className="m-container m-section-head">
             <p className="m-kicker">نمایش محصول</p>
             <h2 className="m-title">{c.screenshotsTitle}</h2>
             <p className="m-lead">{c.screenshotsSubtitle}</p>
@@ -126,12 +146,9 @@ export function LandingPage({ content: c }: Props) {
                 </figure>
               ))}
               <aside className="m-glass-strong m-card m-shot-cta flex flex-col justify-center md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                  <h3 className="text-xl font-black">تجربه زنده نسخه نمایشی</h3>
-                  <p className="mt-3 text-[0.98rem] leading-8 text-[var(--m-muted)] max-w-2xl">
-                    بدون تغییر در هسته نرم‌افزار، می‌توانید محیط واقعی مهرنگار را برای فروش، انبار، مشتریان و گزارش‌ها
-                    آزمایش کنید.
-                  </p>
+                <div className="m-prose-card">
+                  <h3>{c.screensCtaTitle}</h3>
+                  <p className="max-w-2xl">{c.screensCtaBody}</p>
                 </div>
                 <Link href={c.primaryCtaHref} className="m-btn m-btn-primary shrink-0 self-start md:self-center">
                   {c.primaryCtaText}
@@ -142,7 +159,7 @@ export function LandingPage({ content: c }: Props) {
         </section>
 
         <section id="features" className="m-section">
-          <div className="m-container">
+          <div className="m-container m-section-head">
             <p className="m-kicker">قابلیت‌ها</p>
             <h2 className="m-title">{c.featuresTitle}</h2>
             <p className="m-lead">{c.featuresSubtitle}</p>
@@ -150,21 +167,21 @@ export function LandingPage({ content: c }: Props) {
               {c.features.map((f) => (
                 <article
                   key={f.id}
-                  className={`m-glass m-card${f.id === "reports" || f.id === "custom" ? " m-card-featured" : ""}`}
+                  className={`m-glass m-card m-prose-card${f.id === "reports" || f.id === "custom" ? " m-card-featured" : ""}`}
                 >
                   <div className={`m-icon${f.id === "reports" || f.id === "custom" ? " m-icon-accent" : ""}`}>
                     <MarketingIcon name={f.icon} />
                   </div>
-                  <h3 className="text-base font-black">{f.title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-[var(--m-muted)]">{f.description}</p>
+                  <h3>{f.title}</h3>
+                  <p>{f.description}</p>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="why" className="m-section" style={{ paddingTop: 0 }}>
-          <div className="m-container">
+        <section id="why" className="m-section m-section-tight">
+          <div className="m-container m-section-head">
             <p className="m-kicker">مزیت رقابتی</p>
             <h2 className="m-title">{c.benefitsTitle}</h2>
             <p className="m-lead">{c.benefitsSubtitle}</p>
@@ -172,10 +189,10 @@ export function LandingPage({ content: c }: Props) {
               {c.benefits.map((b) => (
                 <article
                   key={b.id}
-                  className={`m-glass m-card${b.id === "reporting" || b.id === "custom" ? " m-card-featured" : ""}`}
+                  className={`m-glass m-card m-prose-card${b.id === "reporting" || b.id === "custom" ? " m-card-featured" : ""}`}
                 >
-                  <h3 className="text-base font-black">{b.title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-[var(--m-muted)]">{b.description}</p>
+                  <h3>{b.title}</h3>
+                  <p>{b.description}</p>
                 </article>
               ))}
             </div>
@@ -183,32 +200,32 @@ export function LandingPage({ content: c }: Props) {
         </section>
 
         <section id="how" className="m-section">
-          <div className="m-container">
+          <div className="m-container m-section-head">
             <p className="m-kicker">مسیر شروع</p>
             <h2 className="m-title">{c.howTitle}</h2>
             <p className="m-lead">{c.howSubtitle}</p>
             <ol className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {c.steps.map((step, i) => (
-                <li key={step.id} className="m-glass m-card list-none">
+                <li key={step.id} className="m-glass m-card m-prose-card list-none">
                   <span className="text-xs font-black text-[var(--m-brand)]">گام {i + 1}</span>
-                  <h3 className="mt-2 text-base font-black">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-[var(--m-muted)]">{step.description}</p>
+                  <h3 className="mt-2">{step.title}</h3>
+                  <p>{step.description}</p>
                 </li>
               ))}
             </ol>
           </div>
         </section>
 
-        <section id="audience" className="m-section" style={{ paddingTop: 0 }}>
-          <div className="m-container">
+        <section id="audience" className="m-section m-section-tight">
+          <div className="m-container m-section-head">
             <p className="m-kicker">مخاطبان</p>
             <h2 className="m-title">{c.audienceTitle}</h2>
             <p className="m-lead">{c.audienceSubtitle}</p>
             <div className="m-grid-3 mt-8">
               {c.audiences.map((a) => (
-                <article key={a.id} className="m-glass m-card">
-                  <h3 className="text-base font-black">{a.title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-[var(--m-muted)]">{a.description}</p>
+                <article key={a.id} className="m-glass m-card m-prose-card">
+                  <h3>{a.title}</h3>
+                  <p>{a.description}</p>
                 </article>
               ))}
             </div>
@@ -216,7 +233,7 @@ export function LandingPage({ content: c }: Props) {
         </section>
 
         <section id="faq" className="m-section m-faq">
-          <div className="m-container">
+          <div className="m-container m-section-head">
             <p className="m-kicker">پشتیبانی محتوایی</p>
             <h2 className="m-title">{c.faqTitle}</h2>
             <p className="m-lead">{c.faqSubtitle}</p>
@@ -231,13 +248,13 @@ export function LandingPage({ content: c }: Props) {
           </div>
         </section>
 
-        <section className="m-section" style={{ paddingTop: 0 }}>
+        <section className="m-section m-section-tight">
           <div className="m-container">
-            <div className="m-glass-strong m-card px-6 py-10 text-center md:px-10">
+            <div className="m-glass-strong m-card m-final-cta">
               <h2 className="m-title" style={{ marginTop: 0 }}>
                 {c.finalCtaTitle}
               </h2>
-              <p className="mx-auto mt-3 max-w-2xl text-[var(--m-muted)] leading-8">{c.finalCtaSubtitle}</p>
+              <p className="m-final-cta-lead">{c.finalCtaSubtitle}</p>
               <div className="m-cta-row justify-center">
                 <Link href={c.primaryCtaHref} className="m-btn m-btn-primary">
                   {c.finalCtaPrimaryText}
@@ -252,13 +269,11 @@ export function LandingPage({ content: c }: Props) {
 
         <section id="contact" className="m-section">
           <div className="m-container grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-            <div>
+            <div className="m-section-head">
               <p className="m-kicker">ارتباط</p>
               <h2 className="m-title">{c.contactTitle}</h2>
-              <p className="m-lead">
-                برای مشاوره، شخصی‌سازی امکانات یا شروع همکاری با تیم مهرنگار در ارتباط باشید.
-              </p>
-              <ul className="mt-6 space-y-3 text-sm font-semibold text-[var(--m-muted)]">
+              <p className="m-lead">{c.contactLead}</p>
+              <ul className="m-contact-list">
                 {c.contactEmail && (
                   <li>
                     ایمیل:{" "}
@@ -294,7 +309,7 @@ export function LandingPage({ content: c }: Props) {
             <p className="mt-2 max-w-xl text-sm leading-7 text-[var(--m-muted)]">{c.footerTagline}</p>
             <p className="mt-4 text-sm text-[var(--m-muted)]">{c.footerCopyright}</p>
           </div>
-          <div className="text-sm leading-8 text-[var(--m-muted)] md:text-left" dir="ltr">
+          <div className="m-footer-meta" dir="ltr">
             <p>
               Designed &amp; developed by{" "}
               <a href={c.footerDeveloperUrl} target="_blank" rel="noopener noreferrer">

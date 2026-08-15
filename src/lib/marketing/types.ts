@@ -55,12 +55,16 @@ export type MarketingContent = {
 
   aboutTitle: string;
   aboutBody: string;
+  aboutProductTitle: string;
+  aboutProductBody: string;
   aboutAudienceTitle: string;
   aboutAudienceBody: string;
 
   screenshotsTitle: string;
   screenshotsSubtitle: string;
   screenshots: MarketingScreenshot[];
+  screensCtaTitle: string;
+  screensCtaBody: string;
 
   featuresTitle: string;
   featuresSubtitle: string;
@@ -88,6 +92,7 @@ export type MarketingContent = {
   finalCtaSecondaryText: string;
 
   contactTitle: string;
+  contactLead: string;
   contactEmail: string;
   contactPhone: string;
   contactAddress: string;

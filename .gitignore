@@ -15,3 +15,5 @@ Thumbs.db
 
 data/marketing-content.json
 data/marketing-admin.json
+public/uploads/marketing/*
+!public/uploads/marketing/.gitkeep
