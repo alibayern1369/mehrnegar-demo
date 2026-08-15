@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" role="img" aria-label="Mehrnegar dashboard demo mockup">
+  <rect width="960" height="640" rx="24" fill="#0f1220"/>
+  <rect x="0" y="0" width="220" height="640" fill="#161a2e"/>
+  <rect x="24" y="28" width="120" height="18" rx="9" fill="#5b4dff"/>
+  <rect x="24" y="80" width="172" height="14" rx="7" fill="#2a314d"/>
+  <rect x="24" y="110" width="148" height="14" rx="7" fill="#2a314d"/>
+  <rect x="24" y="140" width="160" height="14" rx="7" fill="#2a314d"/>
+  <rect x="24" y="170" width="132" height="14" rx="7" fill="#2a314d"/>
+  <rect x="244" y="28" width="220" height="18" rx="9" fill="#2a314d"/>
+  <rect x="244" y="70" width="210" height="110" rx="18" fill="#1b2138"/>
+  <rect x="470" y="70" width="210" height="110" rx="18" fill="#1b2138"/>
+  <rect x="696" y="70" width="220" height="110" rx="18" fill="#1b2138"/>
+  <rect x="244" y="204" width="672" height="380" rx="20" fill="#1b2138"/>
+  <rect x="272" y="420" width="40" height="120" rx="8" fill="#5b4dff"/>
+  <rect x="332" y="360" width="40" height="180" rx="8" fill="#2f6bff"/>
+  <rect x="392" y="300" width="40" height="240" rx="8" fill="#0ea5a4"/>
+  <rect x="452" y="340" width="40" height="200" rx="8" fill="#7c8cff"/>
+  <rect x="512" y="280" width="40" height="260" rx="8" fill="#5b4dff"/>
+  <rect x="572" y="320" width="40" height="220" rx="8" fill="#2f6bff"/>
+  <rect x="680" y="240" width="200" height="14" rx="7" fill="#2a314d"/>
+  <rect x="680" y="274" width="170" height="14" rx="7" fill="#2a314d"/>
+  <rect x="680" y="308" width="190" height="14" rx="7" fill="#2a314d"/>
+  <rect x="24" y="560" width="80" height="24" rx="12" fill="#5b4dff" opacity="0.9"/>
+  <text x="36" y="577" fill="#fff" font-size="12" font-family="Tahoma, Arial" font-weight="700">DEMO</text>
+</svg>

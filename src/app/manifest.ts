@@ -4,11 +4,11 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "مهرنگار",
     short_name: "مهرنگار",
-    description: "سامانه حسابداری و مدیریت انبار مهرنگار",
-    start_url: "/",
+    description: "نرم‌افزار حسابداری و مدیریت فروش مهرنگار",
+    start_url: "/demo",
     display: "standalone",
-    background_color: "#07050f",
-    theme_color: "#7c4dff",
+    background_color: "#f6f7fb",
+    theme_color: "#5b4dff",
     lang: "fa",
     dir: "rtl",
     icons: [

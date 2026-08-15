@@ -1,63 +1,56 @@
-# مهرنگار — Demo
+# مهرنگار — Marketing + Demo
 
-نسخه نمایشی **مهرنگار**؛ سامانه حسابداری و فروش فروشگاهی با Backend در حافظه — بدون نیاز به PostgreSQL یا سرویس خارجی.
+وب‌سایت معرفی **مهرنگار** (نرم‌افزار حسابداری و مدیریت فروش) به‌همراه نسخه نمایشی نرم‌افزار.
 
-![ورود](docs/screenshots/login.png)
+- لندینگ حرفه‌ای فارسی/RTL در مسیر `/`
+- دموی نرم‌افزار (بدون تغییر هسته) در مسیر `/demo`
+- پنل مدیریت محتوای لندینگ در مسیر `/admin`
 
-## معرفی
-
-این مخزن نسخهٔ مستقل Demo مهرنگار است. رابط کاربری مشابه محصول اصلی است و برای آزمایش جریان‌های فروش، انبار، گزارش و تنظیمات طراحی شده است. داده‌ها در حافظه نگه‌داری می‌شوند و با restart سرور بازنشانی می‌شوند.
-
-## امکانات
-
-- Dashboard، محصولات، ثبت فروش، فاکتور، مرجوعی
-- مشتریان، انبارها، انبارگردانی، توزیع
-- گزارش‌های مالی، فروش و موجودی
-- کاربران، تنظیمات، پیامک (Mock)
-- ورود دو مرحله‌ای (OTP Mock)
-- RTL فارسی، Dark/Light، Responsive
-
-## تکنولوژی‌ها
-
-- Next.js 16 · React 19 · TypeScript
-- In-memory Mock Backend
-- Tailwind CSS 4
-
-## نصب و اجرا
+## اجرا
 
 ```bash
 npm install
+cp .env.example .env.local
 npm run dev
 ```
 
-مرورگر: [http://localhost:3000](http://localhost:3000)
+- سایت معرفی: [http://localhost:3000](http://localhost:3000)
+- دموی نرم‌افزار: [http://localhost:3000/demo](http://localhost:3000/demo)
+- ادمین محتوا: [http://localhost:3000/admin](http://localhost:3000/admin)
 
-### حساب‌های ورود
+### حساب‌های ورود دمو
 
 | نقش | نام کاربری | رمز |
 |-----|------------|-----|
 | مدیر | `mehrnegaradmin` | `Admin@1234` |
 | فروشنده | `mehrnegaruser` | `User@1234` |
 
-- **ورود سریع:** دکمه‌های صفحه Login
-- **OTP:** پس از وارد کردن نام کاربری و رمز → کد **`12345`**
+OTP دمو: `12345`
 
-## اجرای تست‌ها
+### ادمین لندینگ
 
-```bash
-npm run lint
-npm run typecheck
-```
+رمز پیش‌فرض توسعه: `mehrnegar-admin`  
+از طریق `MARKETING_ADMIN_PASSWORD` در `.env.local` تنظیم کنید.
 
-## Build و Deploy
+## متغیرهای محیطی
+
+نگاه کنید به `.env.example`:
+
+- `NEXT_PUBLIC_SITE_URL` — آدرس canonical و sitemap
+- `GOOGLE_SITE_VERIFICATION` — تأیید Search Console
+- `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` / `RECAPTCHA_SECRET_KEY`
+- `MARKETING_ADMIN_PASSWORD` / `MARKETING_ADMIN_SECRET`
+
+کلیدها را در کد هاردکد نکنید؛ از env یا پنل ادمین استفاده کنید.
+
+## تکنولوژی
+
+- Next.js 16 · React 19 · TypeScript · Tailwind CSS 4
+- Backend دمو: in-memory mock (بدون PostgreSQL)
+
+## Build
 
 ```bash
 npm run build
 npm start
 ```
-
-برای Vercel: Framework **Next.js** — Environment Variable لازم نیست.
-
-## Screenshotها
-
-![صفحه ورود](docs/screenshots/login.png)

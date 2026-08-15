@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Mehrnegar">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7f8fc"/>
+      <stop offset="45%" stop-color="#e8ecf8"/>
+      <stop offset="100%" stop-color="#dde7ff"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5b4dff"/>
+      <stop offset="100%" stop-color="#2f6bff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="980" cy="90" r="180" fill="#5b4dff" opacity="0.08"/>
+  <circle cx="160" cy="520" r="160" fill="#2f6bff" opacity="0.08"/>
+  <rect x="72" y="72" width="84" height="84" rx="22" fill="url(#mark)"/>
+  <text x="96" y="130" fill="#ffffff" font-size="44" font-family="Tahoma, Arial, sans-serif" font-weight="700">M</text>
+  <text x="176" y="128" fill="#151827" font-size="42" font-family="Tahoma, Arial, sans-serif" font-weight="700">Mehrnegar</text>
+  <text x="72" y="280" fill="#151827" font-size="58" font-family="Tahoma, Arial, sans-serif" font-weight="700">Accounting Software</text>
+  <text x="72" y="360" fill="#5b6478" font-size="30" font-family="Tahoma, Arial, sans-serif">Sales · Inventory · Customers · Reports</text>
+  <text x="72" y="560" fill="#5b4dff" font-size="24" font-family="Tahoma, Arial, sans-serif" font-weight="700">mehrnegar · SaaS Accounting</text>
+</svg>
