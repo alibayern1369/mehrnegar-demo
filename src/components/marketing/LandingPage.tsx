@@ -32,18 +32,13 @@ export function LandingPage({ content: c }: Props) {
 
           <div className="m-container m-hero-grid">
             <div className="m-hero-copy-col">
-              <p className="m-hero-brand m-reveal" style={{ ["--m-delay" as string]: "0ms" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={c.logoUrl} alt="" width={48} height={48} />
-                <span>{c.brandName}</span>
-              </p>
-              <p className="m-hero-eyebrow m-reveal" style={{ ["--m-delay" as string]: "80ms" }}>
+              <p className="m-hero-eyebrow m-reveal" style={{ ["--m-delay" as string]: "0ms" }}>
                 {c.heroEyebrow}
               </p>
-              <h1 id="hero-title" className="m-reveal" style={{ ["--m-delay" as string]: "160ms" }}>
+              <h1 id="hero-title" className="m-reveal" style={{ ["--m-delay" as string]: "80ms" }}>
                 {c.heroTitle}
               </h1>
-              <p className="m-hero-copy m-reveal" style={{ ["--m-delay" as string]: "240ms" }}>
+              <p className="m-hero-copy m-reveal" style={{ ["--m-delay" as string]: "160ms" }}>
                 {c.heroSubtitle}
               </p>
               {c.heroHighlights?.length > 0 && (

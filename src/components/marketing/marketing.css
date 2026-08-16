@@ -429,25 +429,6 @@ body:has(.marketing-root) {
   text-align: start;
 }
 
-.m-hero-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin: 0 0 1rem;
-  font-size: clamp(1.65rem, 3.2vw, 2.35rem);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 1.15;
-  color: var(--m-ink);
-}
-
-.m-hero-brand img {
-  width: 2.85rem;
-  height: 2.85rem;
-  object-fit: contain;
-  display: block;
-}
-
 .m-brand-mark {
   display: flex;
   align-items: center;
